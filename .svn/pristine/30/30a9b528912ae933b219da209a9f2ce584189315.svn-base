@@ -1,0 +1,30 @@
+package com.sas.sanction.dto;
+
+public class ListMasterDto {
+
+	private String listName;
+	private String listUniqueSno;
+	private String listType;
+	public String getListName() {
+		return listName;
+	}
+	public void setListName(String listName) {
+		this.listName = listName;
+	}
+
+	public String getListUniqueSno() {
+		return listUniqueSno;
+	}
+	public void setListUniqueSno(String listUniqueSno) {
+		this.listUniqueSno = listUniqueSno;
+	}
+	public String getListType() {
+		return listType;
+	}
+	public void setListType(String listType) {
+		this.listType = listType;
+	}
+	
+	
+	
+}

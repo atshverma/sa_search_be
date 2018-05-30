@@ -1,0 +1,54 @@
+
+package com.sas.sanction.helper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.sas.sanction.dto.CustomerSearchResponseDto;
+import com.sas.sanction.dto.ListMgmtResponseDto;
+import com.sas.sanction.entities.ListDataVersion;
+import com.sas.sanction.entities.SanctionCustomerVersion;
+
+@Component
+public class AuditSearchHelper {
+
+	public List<CustomerSearchResponseDto> convertSearchResultsToResponse(List<SanctionCustomerVersion> sanctionList) {
+		List<CustomerSearchResponseDto> list =  new ArrayList<CustomerSearchResponseDto>();
+		
+		for (SanctionCustomerVersion sanction : sanctionList) {
+			CustomerSearchResponseDto dto = new CustomerSearchResponseDto();
+			dto.setCurrentSanctionStatus(sanction.getStatus());
+			dto.setCustomerNumber(sanction.getCustomerId());
+			dto.setDob(sanction.getDateOfBirth());
+			dto.setFullName(sanction.getFullName());
+			dto.setLastScreeningDateTime(sanction.getUpdatedDttm());
+			dto.setNationalId(sanction.getUniqueId1());
+			
+			list.add(dto);
+		}
+		return list;
+	}
+
+	public List<ListMgmtResponseDto> convertListDataToDto(List<ListDataVersion> listData) {
+		List<ListMgmtResponseDto> mgmtDtoList = new ArrayList<>();
+		
+		for (ListDataVersion data : listData) {
+			ListMgmtResponseDto dto = new ListMgmtResponseDto();
+			dto.setCustomerNumber(data.getCustomerId());
+//			long time = data.getDob().getTime();
+			dto.setDob(data.getDob());
+			dto.setFullName(data.getFullName());
+			dto.setListName(data.getListName());
+			dto.setListType(data.getListMaster().getListType());
+			dto.setNationalId(data.getIdNum1());
+			dto.setListNameUniqueSno(String.valueOf(data.getListMaster().getListMasterSno()));
+			dto.setListDataUniqueSno(String.valueOf(data.getListDataVerSno()));
+			
+			mgmtDtoList.add(dto);
+		}
+		return mgmtDtoList;
+	}
+
+}

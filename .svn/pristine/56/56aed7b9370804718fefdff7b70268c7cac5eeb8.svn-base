@@ -1,0 +1,247 @@
+package com.sas.sanction.entities;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
+
+@Entity
+@Table(name = "FK_CURR_DIM_FN_SNO", schema = "rskncore")
+public class FinTranFactNcore extends BaseEntity{
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GenericGenerator(name = "generator", strategy = "foreign", 
+	parameters = @Parameter(name = "property", value = "tranDimNcore"))
+	@GeneratedValue(generator="generator")
+	@Column(name = "S_NO")
+	private int sNumber;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TXN_TYP_NUM")
+	private TxnFactNcore txnFactNcore;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ACC_SNO")
+	private AccDimNcore accDimNcore;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CUST_SNO")
+	private CustDimNcore custDimNcore;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "BRANCH_SNO")
+	private BranchDimNcore branchDimNcore;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "STAFF_SNO")
+	private StaffDimNcore staffDimNcore;
+	
+	@Column(name = "ACC_NUM")
+	private String accountNumber;
+	
+	@Column(name = "CREDIT_DEBIT_FLAG")
+	private char creditDebitFlag;
+	
+	@Column(name = "CUST_NUM")
+	private String customerNumber;
+	
+	@Column(name = "TXN_ORIGINATING_CNTRY_NUM")
+	private double transactionOriginatingCountryNumber;
+	
+	@Column(name = "TXN_DESTINATION_CNTRY_NUM")
+	private double transactionDestinationCountryNumber;
+	
+	@Column(name = "SECONDARY_ACC_SNO")
+	private double secondaryAccountSNumber;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SECONDARY_PARTY_SNO")
+	private ExtPartyDimNcore extParyDimNcore;
+	
+	@Column(name = "RELATED_IND")
+	private char relatedInd;
+	
+	@Column(name = "TXN_AMT_LOCAL_CURR")
+	private double transactionAmountLocalCurrency;
+	
+	@Column(name = "TXN_AMT_ACC_CURR")
+	private double transactionAmountAccountCurrency;
+	
+	@Column(name = "TXN_AMT_TXN_CURR")
+	private double transactionAmountTransactionCurrency;
+	
+	@Column(name = "TXN_EXECUTED_TIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date transactionExecutedTime;
+	
+	@Column(name = "TXN_EXECUTED_DT")
+	@Temporal(TemporalType.DATE)
+	private Date transactionExecutedDate;
+	
+	@Column(name = "TXN_POSTED_TIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date transactionPostedTime;
+	
+	@Column(name = "TXN_POSTED_DT")
+	@Temporal(TemporalType.DATE)
+	private Date transactionPostedDate;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TXN_CURR_CD_SNO")
+	private CntryCurrLkpNcore cntryCurrLkpNcore;
+	
+	@OneToOne(fetch=FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private TranDimNcore tranDimNcore;
+	
+	
+	public TxnFactNcore getTxnFactNcore() {
+		return txnFactNcore;
+	}
+	public void setTxnFactNcore(TxnFactNcore txnFactNcore) {
+		this.txnFactNcore = txnFactNcore;
+	}
+	public AccDimNcore getAccDimNcore() {
+		return accDimNcore;
+	}
+	public void setAccDimNcore(AccDimNcore accDimNcore) {
+		this.accDimNcore = accDimNcore;
+	}
+	public CustDimNcore getCustDimNcore() {
+		return custDimNcore;
+	}
+	public void setCustDimNcore(CustDimNcore custDimNcore) {
+		this.custDimNcore = custDimNcore;
+	}
+	public BranchDimNcore getBranchDimNcore() {
+		return branchDimNcore;
+	}
+	public void setBranchDimNcore(BranchDimNcore branchDimNcore) {
+		this.branchDimNcore = branchDimNcore;
+	}
+	public StaffDimNcore getStaffDimNcore() {
+		return staffDimNcore;
+	}
+	public void setStaffDimNcore(StaffDimNcore staffDimNcore) {
+		this.staffDimNcore = staffDimNcore;
+	}
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	public char getCreditDebitFlag() {
+		return creditDebitFlag;
+	}
+	public void setCreditDebitFlag(char creditDebitFlag) {
+		this.creditDebitFlag = creditDebitFlag;
+	}
+	public String getCustomerNumber() {
+		return customerNumber;
+	}
+	public void setCustomerNumber(String customerNumber) {
+		this.customerNumber = customerNumber;
+	}
+	public double getTransactionOriginatingCountryNumber() {
+		return transactionOriginatingCountryNumber;
+	}
+	public void setTransactionOriginatingCountryNumber(double transactionOriginatingCountryNumber) {
+		this.transactionOriginatingCountryNumber = transactionOriginatingCountryNumber;
+	}
+	public double getTransactionDestinationCountryNumber() {
+		return transactionDestinationCountryNumber;
+	}
+	public void setTransactionDestinationCountryNumber(double transactionDestinationCountryNumber) {
+		this.transactionDestinationCountryNumber = transactionDestinationCountryNumber;
+	}
+	public double getSecondaryAccountSNumber() {
+		return secondaryAccountSNumber;
+	}
+	public void setSecondaryAccountSNumber(double secondaryAccountSNumber) {
+		this.secondaryAccountSNumber = secondaryAccountSNumber;
+	}
+	public ExtPartyDimNcore getExtParyDimNcore() {
+		return extParyDimNcore;
+	}
+	public void setExtParyDimNcore(ExtPartyDimNcore extParyDimNcore) {
+		this.extParyDimNcore = extParyDimNcore;
+	}
+	public char getRelatedInd() {
+		return relatedInd;
+	}
+	public void setRelatedInd(char relatedInd) {
+		this.relatedInd = relatedInd;
+	}
+	public double getTransactionAmountLocalCurrency() {
+		return transactionAmountLocalCurrency;
+	}
+	public void setTransactionAmountLocalCurrency(double transactionAmountLocalCurrency) {
+		this.transactionAmountLocalCurrency = transactionAmountLocalCurrency;
+	}
+	public double getTransactionAmountAccountCurrency() {
+		return transactionAmountAccountCurrency;
+	}
+	public void setTransactionAmountAccountCurrency(double transactionAmountAccountCurrency) {
+		this.transactionAmountAccountCurrency = transactionAmountAccountCurrency;
+	}
+	public double getTransactionAmountTransactionCurrency() {
+		return transactionAmountTransactionCurrency;
+	}
+	public void setTransactionAmountTransactionCurrency(double transactionAmountTransactionCurrency) {
+		this.transactionAmountTransactionCurrency = transactionAmountTransactionCurrency;
+	}
+	public Date getTransactionExecutedTime() {
+		return transactionExecutedTime;
+	}
+	public void setTransactionExecutedTime(Date transactionExecutedTime) {
+		this.transactionExecutedTime = transactionExecutedTime;
+	}
+	public Date getTransactionExecutedDate() {
+		return transactionExecutedDate;
+	}
+	public void setTransactionExecutedDate(Date transactionExecutedDate) {
+		this.transactionExecutedDate = transactionExecutedDate;
+	}
+	public Date getTransactionPostedTime() {
+		return transactionPostedTime;
+	}
+	public void setTransactionPostedTime(Date transactionPostedTime) {
+		this.transactionPostedTime = transactionPostedTime;
+	}
+	public Date getTransactionPostedDate() {
+		return transactionPostedDate;
+	}
+	public void setTransactionPostedDate(Date transactionPostedDate) {
+		this.transactionPostedDate = transactionPostedDate;
+	}
+	public CntryCurrLkpNcore getCntryCurrLkpNcore() {
+		return cntryCurrLkpNcore;
+	}
+	public void setCntryCurrLkpNcore(CntryCurrLkpNcore cntryCurrLkpNcore) {
+		this.cntryCurrLkpNcore = cntryCurrLkpNcore;
+	}
+	public TranDimNcore getTranDimNcore() {
+		return tranDimNcore;
+	}
+	public void setTranDimNcore(TranDimNcore tranDimNcore) {
+		this.tranDimNcore = tranDimNcore;
+	}
+	
+	
+	
+}

@@ -1,0 +1,76 @@
+package com.sas.sanction.dto;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+public class CustomerSearchRequestDto {
+
+	private String customerNumber;
+	
+	private String name; 
+	
+	private String nationalId;
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd")
+	private Date screenDate;
+	
+	private String sanctionStatus; 
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd")
+	private Date dob; 
+	
+	
+	
+	public Date getScreenDate() {
+		return screenDate;
+	}
+
+	public void setScreenDate(Date screenDate) {
+		this.screenDate = screenDate;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getCustomerNumber() {
+		return customerNumber;
+	}
+
+	public void setCustomerNumber(String customerNumber) {
+		this.customerNumber = customerNumber;
+	}
+
+	public String getSanctionStatus() {
+		return sanctionStatus;
+	}
+
+	public void setSanctionStatus(String sanctionStatus) {
+		this.sanctionStatus = sanctionStatus;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getNationalId() {
+		return nationalId;
+	}
+
+	public void setNationalId(String nationalId) {
+		this.nationalId = nationalId;
+	}
+	
+	
+	
+	
+}

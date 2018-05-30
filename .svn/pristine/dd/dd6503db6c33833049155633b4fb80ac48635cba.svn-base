@@ -1,0 +1,40 @@
+package com.sas.sanction.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sas.sanction.dto.MatchingOutcomeResponseDto;
+import com.sas.sanction.service.MatchingOutcomeService;
+
+@RestController
+@RequestMapping("/v1/api/match")
+public class MatchingOutcomeController {
+
+	@Autowired
+	MatchingOutcomeService matchingOutcomeService;
+	
+	@RequestMapping(path="/viewMatchingOutcome/{uniqueId}",method=RequestMethod.GET)
+	public List<MatchingOutcomeResponseDto> getMatchingOutcome(@PathVariable String uniqueId) {
+		
+		return matchingOutcomeService.getMatchingOutcome(uniqueId);
+	}
+
+
+	/*@RequestMapping(path="/criteria",method=RequestMethod.GET)
+	public List<MatchingOutcomeResponseDto> getMatchingCriteria() {
+		
+		return matchingOutcomeService.getMatchingCriteria();
+	}
+	
+	@RequestMapping(path="/strength",method=RequestMethod.GET)
+	public List<MatchingOutcomeResponseDto> getMatchingStrength() {
+		
+		return matchingOutcomeService.getMatchingStrength();
+	}*/
+	
+}

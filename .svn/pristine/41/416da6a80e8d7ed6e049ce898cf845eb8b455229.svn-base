@@ -1,0 +1,113 @@
+package com.sas.sanction.service.impl;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sas.sanction.dao.ListDataDao;
+import com.sas.sanction.dao.ListDataVersionDao;
+import com.sas.sanction.dao.ListMasterDao;
+import com.sas.sanction.dto.ListMasterDto;
+import com.sas.sanction.dto.ListMgmtSearchRequestDto;
+import com.sas.sanction.dto.ListMgmtUpdateRequestDto;
+import com.sas.sanction.dto.ListMgmtResponseDto;
+import com.sas.sanction.entities.ListData;
+import com.sas.sanction.entities.ListDataVersion;
+import com.sas.sanction.entities.ListMaster;
+import com.sas.sanction.helper.ListMgmtHelper;
+import com.sas.sanction.service.ListMgmtService;
+import com.sas.sanction.specification.ListMgmtDataSpec;
+import com.sas.sanction.utils.SanctionUtils;
+
+@Service
+public class ListMgmtServiceImpl implements ListMgmtService {
+
+	@Autowired
+	ListDataDao listDataDao;
+	
+	@Autowired
+	ListDataVersionDao listDataVersionDao; 
+	
+	@Autowired
+	ListMasterDao listMasterDao; 
+	
+	@Autowired
+	ListMgmtHelper listMgmtHelper;
+	
+	@Override
+	public List<ListMgmtResponseDto> searchListData(ListMgmtSearchRequestDto listMgmtSearchDto) {
+		List<ListMgmtResponseDto> listMgmtDtoList = null;
+		
+		ListMgmtDataSpec listMgmtDataSpec = new ListMgmtDataSpec(listMgmtSearchDto);
+		List<ListData> listData = listDataDao.findAll(listMgmtDataSpec);
+		
+		if(listData!=null && !listData.isEmpty()){
+			listMgmtDtoList = listMgmtHelper.convertListDataToDto(listData);
+		}
+		
+		return listMgmtDtoList;
+	}
+
+
+	@Override
+	public Set<String> fetchListTypes() {
+		Set<String> masterListTypes = null;
+		List<ListMaster> listMasterList = listMasterDao.findAll();
+		if(listMasterList!=null && !listMasterList.isEmpty()){
+			masterListTypes = listMgmtHelper.convertListMasterToListTypes(listMasterList);
+		}
+		return masterListTypes;
+	}
+
+
+	@Override
+	public List<ListMasterDto> fetchListNames(String listType) {
+		List<ListMasterDto> masterDtoList = null;
+		List<ListMaster> listMasterList = listMasterDao.findDistinctListNameByListType(listType);
+		if(listMasterList!=null && !listMasterList.isEmpty()){
+			masterDtoList = listMgmtHelper.convertListMasterToListNames(listMasterList);
+		}
+		return masterDtoList;
+	}
+
+
+	@Override
+	public String updateListData(ListMgmtUpdateRequestDto listMgmtSearchDto) {
+		
+		if(SanctionUtils.isStringNotNullorEmpty(listMgmtSearchDto.getListDataUniqueSno())){
+			ListData data = listDataDao.findByListDataSno(Integer.parseInt(listMgmtSearchDto.getListDataUniqueSno()));
+		
+			// save in the version table
+			ListDataVersion version = listMgmtHelper.convertListDataToVersion(data);
+			listDataVersionDao.save(version);
+			
+			if(SanctionUtils.isStringNotNullorEmpty(listMgmtSearchDto.getCustomerNumber())){
+				data.setCustomerId(listMgmtSearchDto.getCustomerNumber());
+			}
+			if(listMgmtSearchDto.getDob()!=null){
+				data.setDob(new java.sql.Date(listMgmtSearchDto.getDob().getTime()));
+			}
+			if(SanctionUtils.isStringNotNullorEmpty(listMgmtSearchDto.getFullName())){
+				data.setFullName(listMgmtSearchDto.getFullName());
+			}
+			if(SanctionUtils.isStringNotNullorEmpty(listMgmtSearchDto.getNationalId())){
+				data.setIdNum1(listMgmtSearchDto.getNationalId());
+			}
+			Date now = new Date();
+			data.setUpdatedDt(new java.sql.Date(now.getTime()));
+			data.setUpdatedDttm(new Timestamp(now.getTime()));
+			data.setUpdatedBy("Admin");
+			
+			listDataDao.save(data);
+			
+		return "success";
+		}
+		
+		return "failed";
+	}
+
+}

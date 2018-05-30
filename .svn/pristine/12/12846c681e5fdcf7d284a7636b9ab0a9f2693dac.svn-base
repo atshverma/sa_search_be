@@ -1,0 +1,54 @@
+package com.sas.sanction.specification;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import org.springframework.data.jpa.domain.Specification;
+
+import com.sas.sanction.dto.ListMgmtSearchRequestDto;
+import com.sas.sanction.entities.ListData;
+import com.sas.sanction.entities.ListData_;
+import com.sas.sanction.utils.SanctionUtils;
+
+
+
+public class ListMgmtDataSpec implements Specification<ListData>{
+
+	private ListMgmtSearchRequestDto listMgmtDto ;
+	
+	public ListMgmtDataSpec(ListMgmtSearchRequestDto listMgmtDto) {
+		this.listMgmtDto=listMgmtDto;
+	}
+	
+	@Override
+	public Predicate toPredicate(Root<ListData> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(SanctionUtils.isStringNotNullorEmpty(listMgmtDto.getCustomerName())) {
+			  predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(ListData_.fullName)), "%"+listMgmtDto.getCustomerName().toLowerCase()+"%" ));
+		}
+		if(SanctionUtils.isStringNotNullorEmpty(listMgmtDto.getListNameUniqueId())) {
+			  predicates.add(criteriaBuilder.equal(root.get(ListData_.listMaster), Integer.parseInt(listMgmtDto.getListNameUniqueId())));
+		}		
+		if(listMgmtDto.getDob()!=null) {
+			 predicates.add(criteriaBuilder.equal(root.get(ListData_.dob), SanctionUtils.removeTime(listMgmtDto.getDob())));
+		}
+		if(SanctionUtils.isStringNotNullorEmpty(listMgmtDto.getNationalId())) {
+			   predicates.add(criteriaBuilder.or(criteriaBuilder.in(criteriaBuilder.lower(root.get(ListData_.idNum1))).value(listMgmtDto.getNationalId().toLowerCase()), 
+			    		  criteriaBuilder.in(criteriaBuilder.lower(root.get(ListData_.idNum2))).value(listMgmtDto.getNationalId().toLowerCase())));
+		}
+		
+		 return andTogether(predicates, criteriaBuilder);
+	}
+
+	
+	private Predicate andTogether(List<Predicate> predicates, CriteriaBuilder cb) {
+	    return cb.and(predicates.toArray(new Predicate[0]));
+	  }
+}

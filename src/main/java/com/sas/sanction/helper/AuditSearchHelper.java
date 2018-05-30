@@ -1,0 +1,134 @@
+
+package com.sas.sanction.helper;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.stereotype.Component;
+
+import com.google.common.base.Strings;
+import com.sas.sanction.dto.AuditCustomerVersionResponseDto;
+import com.sas.sanction.dto.AuditTransactionVersionResponseDto;
+import com.sas.sanction.dto.CustomerSearchRequestDto;
+import com.sas.sanction.dto.CustomerSearchResponseDto;
+import com.sas.sanction.dto.ListMgmtResponseDto;
+import com.sas.sanction.dto.ListMgmtSearchRequestDto;
+import com.sas.sanction.entities.ListDataVersion;
+import com.sas.sanction.entities.SanctionCustomerVersion;
+import com.sas.sanction.utils.SanctionUtils;
+
+@Component
+public class AuditSearchHelper {
+
+	public boolean isCustomerVersionSearchRequestDtoEmpty(CustomerSearchRequestDto customerSearchRequestDto) {
+
+		if(!Strings.isNullOrEmpty(customerSearchRequestDto.getNationalId()) || 
+				!Strings.isNullOrEmpty(customerSearchRequestDto.getCurrentSanctionStatus()) ||
+				!Strings.isNullOrEmpty(customerSearchRequestDto.getCustomerNumber()) ||
+				!Strings.isNullOrEmpty(customerSearchRequestDto.getFullname()) ||
+				//customerSearchRequestDto.getScreeningDate()!=null ||
+ 				//customerSearchRequestDto.getScreeningStartDate()!=null ||
+				(customerSearchRequestDto.getScreeningDateTime()!=null && customerSearchRequestDto.getScreeningDateTime().length!=0)||
+						//customerSearchRequestDto.getScreeningEndDate()!=null ||
+							customerSearchRequestDto.getDob()!=null ) 
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	public boolean isListMgmtVersionSearchDtoEmpty(ListMgmtSearchRequestDto listMgmtSearchDto) {
+
+		if(SanctionUtils.isStringNotNullorEmpty(listMgmtSearchDto.getCustomerName())|| 
+				SanctionUtils.isStringNotNullorEmpty(listMgmtSearchDto.getListNameUniqueSno()) ||
+						SanctionUtils.isStringNotNullorEmpty(listMgmtSearchDto.getNationalId()) ||
+								listMgmtSearchDto.getDob()!=null ||  
+								SanctionUtils.isStringNotNullorEmpty(listMgmtSearchDto.getListType())
+				){
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public List<CustomerSearchResponseDto> convertCustomerVersionResultsToResponse(List<SanctionCustomerVersion> sanctionList) {
+		List<CustomerSearchResponseDto> list =  new ArrayList<CustomerSearchResponseDto>();
+		
+		for (SanctionCustomerVersion sanction : sanctionList) {
+			CustomerSearchResponseDto dto = new CustomerSearchResponseDto();
+			dto.setCurrentSanctionStatus(sanction.getStatus());
+			dto.setCustomerNumber(sanction.getCustomerId());
+			dto.setDob(sanction.getDateOfBirth());
+			dto.setFullName(sanction.getFullName());
+			dto.setLastScreeningDateTime(sanction.getUpdatedDttm());
+			dto.setNationalId(sanction.getUniqueId1());
+			
+			list.add(dto);
+		}
+		return list;
+	}
+
+	public List<ListMgmtResponseDto> convertListVersionResultsToDto(List<ListDataVersion> listData) {
+		List<ListMgmtResponseDto> mgmtDtoList = new ArrayList<>();
+		
+		for (ListDataVersion data : listData) {	
+			ListMgmtResponseDto dto = new ListMgmtResponseDto();
+			dto.setCustomerNumber(data.getCustomerId());
+//			long time = data.getDob().getTime();
+			dto.setDob(data.getDob());
+			dto.setFullName(data.getFullName());
+			dto.setListName(data.getListName());
+			dto.setListType(data.getListMaster().getListType());
+			dto.setNationalId(data.getIdNum1());
+			dto.setListNameUniqueSno(String.valueOf(data.getListMaster().getListMasterSno()));
+			dto.setListDataUniqueSno(String.valueOf(data.getListDataVerSno()));
+			
+			mgmtDtoList.add(dto);
+		}
+		return mgmtDtoList;
+	}
+
+	public List<AuditCustomerVersionResponseDto> convertCustomerVersionResultsToOutcomeResponse(
+			List<SanctionCustomerVersion> sanctionCustomerVersionList) {
+		List<AuditCustomerVersionResponseDto> list =  new ArrayList<AuditCustomerVersionResponseDto>();
+		
+		for (SanctionCustomerVersion sanction : sanctionCustomerVersionList) {
+			AuditCustomerVersionResponseDto dto = new AuditCustomerVersionResponseDto();
+			dto.setSanctionStatus(sanction.getStatus());
+			dto.setCustomerNumber(sanction.getCustomerId());
+			dto.setFullname(sanction.getFullName());
+			dto.setTimeOfChange(sanction.getCreatedDt());
+			dto.setNationalId(sanction.getUniqueId1());
+			
+			list.add(dto);
+		}
+		return list;
+	}
+
+	public List<AuditTransactionVersionResponseDto> convertListVersionResultsToOutcomeResponse(List<ListDataVersion> listDataVersionList) {
+		List<AuditTransactionVersionResponseDto> mgmtDtoList = new ArrayList<>();
+		int i=0;
+		for (ListDataVersion data : listDataVersionList) {
+			AuditTransactionVersionResponseDto dto = new AuditTransactionVersionResponseDto();
+			dto.setCustomerNumber(data.getCustomerId());
+//			long time = data.getDob().getTime();
+			//dto.setDob(data.getDob());
+			
+			dto.setFieldName("fullName");
+			dto.setFieldValue(data.getFullName());
+			dto.setUserName(data.getCustomerId());
+			dto.setListName(data.getListName());
+			dto.setListType(data.getListMaster().getListType());
+			dto.setCustomerNumber(data.getCustomerId());
+			dto.setListName(data.getListName());
+			dto.setListType(data.getListMaster().getListType());
+			dto.setTimeOfChange(data.getCreatedDt());
+			
+//			dto.setNationalId(data.getIdNum1());
+//			dto.setListNameUniqueSno(String.valueOf(data.getListMaster().getListMasterSno()));
+//			dto.setListDataUniqueSno(String.valueOf(data.getListDataVerSno()));
+			mgmtDtoList.add(dto);
+		}
+		return mgmtDtoList;
+	}
+}

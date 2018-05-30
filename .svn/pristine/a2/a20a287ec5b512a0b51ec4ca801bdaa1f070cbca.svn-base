@@ -1,0 +1,203 @@
+package com.sas.sanction.entities;
+
+import java.io.Serializable;
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
+
+
+/**
+ * The persistent class for the txn_fact_ncore database table.
+ * 
+ */
+@Entity
+@Table(name="txn_fact_ncore")
+@NamedQuery(name="TxnFactNcore.findAll", query="SELECT t FROM TxnFactNcore t")
+public class TxnFactNcore implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="TXN_TYP_NUM")
+	private long txnTypNum;
+
+	@Column(name="CHANNEL_MED")
+	private String channelMed;
+
+	@Column(name="CHANNEL_NAME")
+	private String channelName;
+
+	@Column(name="CREATED_BY")
+	private String createdBy;
+
+	@Column(name="CREATED_DT")
+	private Object createdDt;
+
+	@Column(name="CREATED_DTTM")
+	private Timestamp createdDttm;
+
+	@Column(name="PRODUCT_MED")
+	private String productMed;
+
+	@Column(name="PRODUCT_NAME")
+	private String productName;
+
+	@Column(name="SERVICE_NAME")
+	private String serviceName;
+
+	@Column(name="TXN_CAT")
+	private String txnCat;
+
+	@Column(name="TXN_TYP_FLAG")
+	private String txnTypFlag;
+
+	@Column(name="UPDTD_BY")
+	private String updtdBy;
+
+	@Column(name="UPDTD_DT")
+	private Object updtdDt;
+
+	@Column(name="UPDTD_DTTM")
+	private Timestamp updtdDttm;
+
+	//bi-directional many-to-one association to NonFinTranFactNcore
+	@OneToMany(mappedBy="txnFactNcore")
+	private List<NonFinTranFactNcore> nonFinTranFactNcores;
+
+	public TxnFactNcore() {
+	}
+
+	public long getTxnTypNum() {
+		return this.txnTypNum;
+	}
+
+	public void setTxnTypNum(long txnTypNum) {
+		this.txnTypNum = txnTypNum;
+	}
+
+	public String getChannelMed() {
+		return this.channelMed;
+	}
+
+	public void setChannelMed(String channelMed) {
+		this.channelMed = channelMed;
+	}
+
+	public String getChannelName() {
+		return this.channelName;
+	}
+
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
+	}
+
+	public String getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Object getCreatedDt() {
+		return this.createdDt;
+	}
+
+	public void setCreatedDt(Object createdDt) {
+		this.createdDt = createdDt;
+	}
+
+	public Timestamp getCreatedDttm() {
+		return this.createdDttm;
+	}
+
+	public void setCreatedDttm(Timestamp createdDttm) {
+		this.createdDttm = createdDttm;
+	}
+
+	public String getProductMed() {
+		return this.productMed;
+	}
+
+	public void setProductMed(String productMed) {
+		this.productMed = productMed;
+	}
+
+	public String getProductName() {
+		return this.productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getServiceName() {
+		return this.serviceName;
+	}
+
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
+	public String getTxnCat() {
+		return this.txnCat;
+	}
+
+	public void setTxnCat(String txnCat) {
+		this.txnCat = txnCat;
+	}
+
+	public String getTxnTypFlag() {
+		return this.txnTypFlag;
+	}
+
+	public void setTxnTypFlag(String txnTypFlag) {
+		this.txnTypFlag = txnTypFlag;
+	}
+
+	public String getUpdtdBy() {
+		return this.updtdBy;
+	}
+
+	public void setUpdtdBy(String updtdBy) {
+		this.updtdBy = updtdBy;
+	}
+
+	public Object getUpdtdDt() {
+		return this.updtdDt;
+	}
+
+	public void setUpdtdDt(Object updtdDt) {
+		this.updtdDt = updtdDt;
+	}
+
+	public Timestamp getUpdtdDttm() {
+		return this.updtdDttm;
+	}
+
+	public void setUpdtdDttm(Timestamp updtdDttm) {
+		this.updtdDttm = updtdDttm;
+	}
+
+	public List<NonFinTranFactNcore> getNonFinTranFactNcores() {
+		return this.nonFinTranFactNcores;
+	}
+
+	public void setNonFinTranFactNcores(List<NonFinTranFactNcore> nonFinTranFactNcores) {
+		this.nonFinTranFactNcores = nonFinTranFactNcores;
+	}
+
+	public NonFinTranFactNcore addNonFinTranFactNcore(NonFinTranFactNcore nonFinTranFactNcore) {
+		getNonFinTranFactNcores().add(nonFinTranFactNcore);
+		nonFinTranFactNcore.setTxnFactNcore(this);
+
+		return nonFinTranFactNcore;
+	}
+
+	public NonFinTranFactNcore removeNonFinTranFactNcore(NonFinTranFactNcore nonFinTranFactNcore) {
+		getNonFinTranFactNcores().remove(nonFinTranFactNcore);
+		nonFinTranFactNcore.setTxnFactNcore(null);
+
+		return nonFinTranFactNcore;
+	}
+
+}

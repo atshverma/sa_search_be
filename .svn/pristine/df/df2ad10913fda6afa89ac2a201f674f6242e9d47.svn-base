@@ -1,0 +1,33 @@
+package com.sas.sanction.helper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.sas.sanction.dto.TransactionSearchResponseDto;
+import com.sas.sanction.entities.SanctionCustomer;
+
+@Component
+public class TransactionSearchHelper {
+
+
+	public List<TransactionSearchResponseDto> convertSearchResultsToResponse(List<SanctionCustomer> transactionList) {
+		List<TransactionSearchResponseDto> list =  new ArrayList<TransactionSearchResponseDto>();
+		
+		for (SanctionCustomer transaction : transactionList) {
+			TransactionSearchResponseDto dto = new TransactionSearchResponseDto();
+			dto.setCurrentSanctionStatus(transaction.getStatus());
+			dto.setRefNumber(transaction.getTransactionNo());
+			dto.setType(transaction.getTransactionType());
+			dto.setTransactionDateTime(transaction.getCreatedDt());
+			dto.setAmount(transaction.getTransactionAmount());
+			dto.setTransactionSanctionStatus(transaction.getStatus());
+			dto.setLastScreeningDate(transaction.getUpdatedDt());
+			
+			list.add(dto);
+		}
+		return list;
+	}
+
+}

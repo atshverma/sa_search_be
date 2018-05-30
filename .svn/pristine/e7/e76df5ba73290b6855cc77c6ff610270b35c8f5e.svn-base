@@ -1,0 +1,47 @@
+package com.sas.sanction.controller;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sas.sanction.dto.CustomerSearchRequestDto;
+import com.sas.sanction.dto.CustomerSearchResponseDto;
+import com.sas.sanction.dto.ListMgmtResponseDto;
+import com.sas.sanction.dto.ListMgmtSearchRequestDto;
+import com.sas.sanction.service.AuditSearchService;
+
+import io.swagger.annotations.ApiOperation;
+
+@RestController
+@RequestMapping(value="/v1/api/audit")
+public class AuditCustomerSearchAPIController {
+
+	private Logger logger = Logger.getLogger(AuditCustomerSearchAPIController.class);
+	
+	@Autowired
+	AuditSearchService auditSearchService;
+	
+	@RequestMapping(path="/customerSearch",method=RequestMethod.POST)
+	@ApiOperation(value="API to search for customers from Sanction_Customer, will accept search data in JSON format")
+	public List<CustomerSearchResponseDto> auditCustomerSearch(@RequestBody CustomerSearchRequestDto auditSearchRequestDto) {
+		System.out.println("method called");
+		logger.info("method called");
+		return auditSearchService.getAuditCustomerSearch(auditSearchRequestDto);
+	}
+	
+
+	@RequestMapping(path="/listSearch",method=RequestMethod.POST)
+	@ApiOperation(value="API to search for customers from Sanction_Customer, will accept search data in JSON format")
+	public List<ListMgmtResponseDto> auditListSearch(@RequestBody ListMgmtSearchRequestDto auditSearchRequestDto) {
+		System.out.println("method called");
+		logger.info("method called");
+		return auditSearchService.getAuditListSearch(auditSearchRequestDto);
+	}
+	
+	
+}

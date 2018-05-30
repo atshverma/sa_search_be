@@ -1,0 +1,59 @@
+package com.sas.sanction.dto;
+
+public class MatchingStrengthDto {
+
+	private int sno;
+	
+	private String matchingFieldName; 
+	
+	private String matchType;
+	
+	private String strength;
+	
+	private boolean isUpdated;
+
+	public int getSno() {
+		return sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	
+	public String getMatchingFieldName() {
+		return matchingFieldName;
+	}
+
+	public void setMatchingFieldName(String matchingFieldName) {
+		this.matchingFieldName = matchingFieldName;
+	}
+
+
+	public String getMatchType() {
+		return matchType;
+	}
+
+	public void setMatchType(String matchType) {
+		this.matchType = matchType;
+	}
+
+	public String getStrength() {
+		return strength;
+	}
+
+	public void setStrength(String strength) {
+		this.strength = strength;
+	}
+
+	public boolean isUpdated() {
+		return isUpdated;
+	}
+
+	public void setUpdated(boolean isUpdated) {
+		this.isUpdated = isUpdated;
+	} 
+	
+	
+	
+}

@@ -1,0 +1,107 @@
+package com.sas.sanction.specification;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+//import org.apache.commons.lang.StringUtils;
+import org.springframework.data.jpa.domain.Specification;
+
+import com.sas.sanction.dto.CustomerSearchRequestDto;
+import com.sas.sanction.dto.TransactionSearchRequestDto;
+import com.sas.sanction.entities.SanctionRequestData;
+import com.sas.sanction.entities.SanctionRequestData_;
+import com.sas.sanction.utils.SanctionUtils;
+
+public class SanctionRequestDataSpec implements Specification<SanctionRequestData> {
+
+	
+	 private TransactionSearchRequestDto tran ;
+	 private CustomerSearchRequestDto cust ;
+	 
+	private  boolean isCustomer ;
+	private boolean isTransanction;
+	 
+	public <T> SanctionRequestDataSpec(T request) {
+		if(request instanceof TransactionSearchRequestDto) {
+			tran = (TransactionSearchRequestDto) request;
+			isTransanction=true;
+		}else if(request instanceof CustomerSearchRequestDto) {
+			isCustomer= true;
+			cust =(CustomerSearchRequestDto) request;
+		}
+	}
+	
+	@Override
+	public Predicate toPredicate(Root<SanctionRequestData> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(isCustomer)	{	
+			 if(SanctionUtils.isStringNotNullorEmpty(cust.getName())) {
+			      predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionRequestData_.fullName)), cust.getName().toLowerCase() ));
+			 	}
+			 if (SanctionUtils.isStringNotNullorEmpty(cust.getCustomerNumber())) {
+			      predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionRequestData_.customerId)), cust.getCustomerNumber().toLowerCase() ));
+			    }
+			 if (SanctionUtils.isStringNotNullorEmpty(cust.getNationalId())) {
+			      predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionRequestData_.uniqueId1)), cust.getNationalId().toLowerCase()));
+			     //predicates.add(cb.equal(cb.lower(root.get(SanctionRequestData_.uniqueId2)), cust.getNationalId().toLowerCase()));
+			    }
+			 if (cust.getScreenStartDate()!=null && cust.getScreenEndDate()==null) {
+			      predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionRequestData_.createdDt), SanctionUtils.removeTime(cust.getScreenStartDate())));
+			    }
+			 if (cust.getScreenEndDate()!=null && cust.getScreenStartDate()==null) {
+				 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionRequestData_.updatedDt), SanctionUtils.removeTime(cust.getScreenEndDate())));
+			    }
+			 if (cust.getScreenEndDate()!=null && cust.getScreenStartDate()!=null) {
+				 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionRequestData_.updatedDt), SanctionUtils.removeTime(cust.getScreenEndDate())));
+				 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionRequestData_.createdDt), SanctionUtils.removeTime(cust.getScreenStartDate())));
+			    }
+			 if (cust.getDob()!=null) {
+				 predicates.add(criteriaBuilder.equal(root.get(SanctionRequestData_.dateOfBirth), SanctionUtils.removeTime(cust.getDob())));
+			    }
+			 if(SanctionUtils.isStringNotNullorEmpty(cust.getSanctionStatus())){
+				 predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionRequestData_.status)), cust.getSanctionStatus().toLowerCase() ));
+			 }
+		}
+		else if(isTransanction) {
+				if(SanctionUtils.isStringNotNullorEmpty(tran.getRefNumber())) {
+					predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionRequestData_.customerId)), tran.getRefNumber().toLowerCase() ));
+				}
+				if(SanctionUtils.isStringNotNullorEmpty(tran.getTransactionType())) {
+					predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionRequestData_.transactionType)), tran.getTransactionType().toLowerCase() ));
+				}
+				if(SanctionUtils.isStringNotNullorEmpty(tran.getSanctionStatus())) {
+					predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionRequestData_.status)), tran.getSanctionStatus().toLowerCase() ));
+				}
+				if(tran.getAmountGreaterOrEqual()!=null){
+					predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionRequestData_.transactionAmount), tran.getAmountGreaterOrEqual()));
+				}
+				if(tran.getAmountLessThan()!=null){
+					predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionRequestData_.transactionAmount), tran.getAmountLessThan()));
+				}
+				if (tran.getTransactionFrom()!=null && tran.getTransactionTo()==null) {
+				     predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionRequestData_.createdDt), SanctionUtils.removeTime(tran.getTransactionFrom())));
+				   }
+				if (tran.getTransactionTo()!=null && tran.getTransactionFrom()==null) {
+					predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionRequestData_.updatedDt), SanctionUtils.removeTime(tran.getTransactionTo())));
+				   }
+				if (tran.getTransactionFrom()!=null && tran.getTransactionTo()!=null) {
+					 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionRequestData_.updatedDt), SanctionUtils.removeTime(tran.getTransactionTo())));
+					 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionRequestData_.createdDt), SanctionUtils.removeTime(tran.getTransactionFrom())));
+				   }
+			}
+		 return andTogether(predicates, criteriaBuilder);
+	}
+	 
+	
+	private Predicate andTogether(List<Predicate> predicates, CriteriaBuilder cb) {
+	    return cb.and(predicates.toArray(new Predicate[0]));
+	  }
+
+}

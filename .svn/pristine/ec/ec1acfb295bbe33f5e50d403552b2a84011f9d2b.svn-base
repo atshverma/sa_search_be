@@ -1,0 +1,127 @@
+package com.sas.sanction.entities;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@MappedSuperclass
+public class BaseEntity implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="id", columnDefinition = "CHAR(32)")
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	private String id;
+	
+	@Column(name="created_by")
+	private String createdBy;
+
+	@Column(name="created_dt")
+	@Temporal(TemporalType.DATE)
+	private Date createdDt;
+
+	@Column(name="created_dttm")
+	private Timestamp createdDttm;
+	
+	@Column(name="updated_by")
+	private String updatedBy;
+
+	@Column(name="updated_dt")
+	@Temporal(TemporalType.DATE)
+	private Date updatedDt;
+
+	@Column(name="updated_dttm")
+	private Timestamp updatedDttm;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	
+
+	public Timestamp getCreatedDttm() {
+		return createdDttm;
+	}
+
+	public void setCreatedDttm(Timestamp createdDttm) {
+		this.createdDttm = createdDttm;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	
+
+	public Date getCreatedDt() {
+		return createdDt;
+	}
+
+	public void setCreatedDt(Date createdDt) {
+		this.createdDt = createdDt;
+	}
+
+	public Date getUpdatedDt() {
+		return updatedDt;
+	}
+
+	public void setUpdatedDt(Date updatedDt) {
+		this.updatedDt = updatedDt;
+	}
+
+	public Timestamp getUpdatedDttm() {
+		return updatedDttm;
+	}
+
+	public void setUpdatedDttm(Timestamp updatedDttm) {
+		this.updatedDttm = updatedDttm;
+	}
+
+	@PreUpdate
+	protected void onPreUpdate() {
+		this.updatedDt = new Date();
+	}
+	
+	@PrePersist 
+	protected void onPrePersist() {
+		Date now =  new Date();
+		this.createdDttm = new Timestamp(now.getTime());
+		this.updatedDttm = createdDttm;
+		this.createdDt = now;
+		this.updatedDt = createdDt;
+	}
+	
+	
+}

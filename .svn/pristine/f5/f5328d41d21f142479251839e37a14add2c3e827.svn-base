@@ -1,0 +1,55 @@
+package com.sas.sanction.controller;
+
+import java.util.List;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sas.sanction.dto.ListMasterDto;
+import com.sas.sanction.dto.ListMgmtSearchRequestDto;
+import com.sas.sanction.dto.ListMgmtUpdateRequestDto;
+import com.sas.sanction.dto.ListMgmtResponseDto;
+import com.sas.sanction.service.ListMgmtService;
+
+@RestController
+@RequestMapping(path="/v1/api/listMgmt")
+public class ListMgmtAPIController {
+	
+	private static Logger logger =  Logger.getLogger(ListMgmtAPIController.class);
+	
+	@Autowired
+	ListMgmtService listMgmtService;
+	
+	
+	@RequestMapping(path="/searchListData",method=RequestMethod.POST)
+	public List<ListMgmtResponseDto> searchListData(@RequestBody ListMgmtSearchRequestDto listMgmtSearchDto) {
+		System.out.println("searchListData method called");
+		logger.info("searchListData method called");
+		return listMgmtService.searchListData(listMgmtSearchDto);
+	}
+
+	@RequestMapping(path="/updateListData",method=RequestMethod.POST)
+	public String updateListData(@RequestBody ListMgmtUpdateRequestDto listMgmtSearchDto) {
+		System.out.println("updateListData method called");
+		logger.info("updateListData method called");
+		return listMgmtService.updateListData(listMgmtSearchDto);
+	}
+
+	
+	@RequestMapping(path="/fetchListTypes",method=RequestMethod.GET)
+	public Set<String> fetchListTypes() {
+		return listMgmtService.fetchListTypes();
+	}
+	
+	@RequestMapping(path="/fetchListNames/{listType}",method=RequestMethod.GET)
+	public List<ListMasterDto> fetchListNames(@PathVariable String listType) {
+		return listMgmtService.fetchListNames(listType);
+	}
+	
+}

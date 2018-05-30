@@ -1,0 +1,102 @@
+package com.sas.sanction.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sas.sanction.dao.ListDataVersionDao;
+import com.sas.sanction.dao.SanctionCustomerVersionDao;
+import com.sas.sanction.dto.AuditCustomerVersionResponseDto;
+import com.sas.sanction.dto.AuditTransactionVersionResponseDto;
+import com.sas.sanction.dto.CustomerSearchRequestDto;
+import com.sas.sanction.dto.CustomerSearchResponseDto;
+import com.sas.sanction.dto.ListMgmtResponseDto;
+import com.sas.sanction.dto.ListMgmtSearchRequestDto;
+import com.sas.sanction.entities.ListDataVersion;
+import com.sas.sanction.entities.SanctionCustomerVersion;
+import com.sas.sanction.helper.AuditSearchHelper;
+import com.sas.sanction.service.AuditSearchService;
+import com.sas.sanction.specification.ListMgmtVersionDataSpec;
+import com.sas.sanction.specification.SanctionCustomerVersionDataSpec;
+
+@Service
+public class AuditSearchServiceImpl implements AuditSearchService {
+
+	@Autowired
+	SanctionCustomerVersionDao sanctionCustomerVersionDao;
+	
+	@Autowired
+	AuditSearchHelper auditHelper;
+	
+	@Autowired
+	ListDataVersionDao mgmtVersionDao;
+	
+	@Override
+	public List<CustomerSearchResponseDto> getAuditCustomerSearch(CustomerSearchRequestDto auditSearchRequestDto) {
+		
+		List<CustomerSearchResponseDto> responseList = null;
+		
+		boolean shouldSearch =  auditHelper.isCustomerVersionSearchRequestDtoEmpty(auditSearchRequestDto);
+		if(shouldSearch){
+			SanctionCustomerVersionDataSpec sanctionRequestData = new SanctionCustomerVersionDataSpec(auditSearchRequestDto);
+			List<SanctionCustomerVersion> sanctionList = sanctionCustomerVersionDao.findAll(sanctionRequestData);
+			
+			if(!sanctionList.isEmpty() && sanctionList!=null) {
+				 responseList = auditHelper.convertCustomerVersionResultsToResponse(sanctionList);
+			}
+		}
+		
+		return responseList;
+	}
+	
+	
+	@Override
+	public List<ListMgmtResponseDto> getAuditListSearch(ListMgmtSearchRequestDto auditSearchRequestDto) {
+		List<ListMgmtResponseDto> listMgmtDtoList = null;
+		
+		boolean shouldSearch = auditHelper.isListMgmtVersionSearchDtoEmpty(auditSearchRequestDto);
+		
+		if(shouldSearch){
+			ListMgmtVersionDataSpec listMgmtDataSpec = new ListMgmtVersionDataSpec(auditSearchRequestDto);
+			List<ListDataVersion> listData = mgmtVersionDao.findAll(listMgmtDataSpec);
+			
+			if(listData!=null && !listData.isEmpty()){
+				listMgmtDtoList = auditHelper.convertListVersionResultsToDto(listData);
+			}
+		}
+		
+		return listMgmtDtoList;
+	}
+
+
+	@Override
+	public List<AuditCustomerVersionResponseDto> getCustomerVersionMatchingOutcome(String customerNumber) {
+		List<AuditCustomerVersionResponseDto> responseDtoList = null;
+		
+		List<SanctionCustomerVersion> sanctionCustomerVersionList = sanctionCustomerVersionDao.findByCustomerId(customerNumber);
+		
+		if(sanctionCustomerVersionList!=null && !sanctionCustomerVersionList.isEmpty()){
+			responseDtoList = auditHelper.convertCustomerVersionResultsToOutcomeResponse(sanctionCustomerVersionList);
+		}
+		
+		return responseDtoList;
+	}
+
+
+	@Override
+	public List<AuditTransactionVersionResponseDto> getListVersionMatchingOutcome(String customerNumber) {
+		 List<AuditTransactionVersionResponseDto> responseDtoList = null;
+		 
+		 List<ListDataVersion> listDataVersionList  = mgmtVersionDao.findByCustomerId(customerNumber);
+		 
+		 if(listDataVersionList!=null && !listDataVersionList.isEmpty()){
+			 responseDtoList =  auditHelper.convertListVersionResultsToOutcomeResponse(listDataVersionList);
+		 }
+		
+		
+		return responseDtoList;
+	}
+
+
+}

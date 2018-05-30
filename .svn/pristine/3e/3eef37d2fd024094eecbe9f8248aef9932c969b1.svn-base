@@ -1,0 +1,36 @@
+package com.sas.sanction.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sas.sanction.dto.MatchingStrengthDto;
+import com.sas.sanction.service.MatchingStrengthService;
+
+@RestController
+@RequestMapping("v1/api/matchingStrength")
+public class MatchingStrengthAPIController {
+
+	@Autowired
+	MatchingStrengthService matchingStrengthservice;
+	
+	
+	@RequestMapping(path="/listAllMatchingCriteria",method=RequestMethod.GET)
+	public List<MatchingStrengthDto> getAllMatchingStrength() {
+		
+		return	matchingStrengthservice.getAllMatchingStrength();
+	}
+	
+	@RequestMapping(path="/submitMatchingCriteria",method=RequestMethod.POST)
+	public List<MatchingStrengthDto> submitMatchingCriteria(@RequestBody List<MatchingStrengthDto> matchingStrengthList){
+		
+		matchingStrengthservice.submitMatchingCriteria(matchingStrengthList);
+		
+		return matchingStrengthservice.getAllMatchingStrength();
+	}
+	
+}

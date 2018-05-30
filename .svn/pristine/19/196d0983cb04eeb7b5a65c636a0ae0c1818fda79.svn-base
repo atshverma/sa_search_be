@@ -1,0 +1,72 @@
+package com.sas.sanction.dto;
+
+public class MatchingCriteriaDto {
+
+	private  String uniqueSno; 
+	
+	private String matchingFieldName; 
+	
+	private String matchType;
+
+	private boolean isUpdated = false;
+	
+	private boolean isDeleted = false;
+	
+	private boolean isNew = false;
+	
+	
+	
+	public boolean isNew() {
+		return isNew;
+	}
+
+	public void setNew(boolean isNew) {
+		this.isNew = isNew;
+	}
+
+	public boolean isUpdated() {
+		return isUpdated;
+	}
+
+	public void setUpdated(boolean isUpdated) {
+		this.isUpdated = isUpdated;
+	}
+
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
+	
+
+	public String getUniqueSno() {
+		return uniqueSno;
+	}
+
+	public void setUniqueSno(String uniqueSno) {
+		this.uniqueSno = uniqueSno;
+	}
+
+	public String getMatchingFieldName() {
+		return matchingFieldName;
+	}
+
+	public void setMatchingFieldName(String matchingFieldName) {
+		this.matchingFieldName = matchingFieldName;
+	}
+
+	public String getMatchType() {
+		return matchType;
+	}
+
+	public void setMatchType(String matchType) {
+		this.matchType = matchType;
+	}
+	
+	
+	
+	
+}

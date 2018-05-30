@@ -1,0 +1,64 @@
+package com.sas.sanction.helper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.sas.sanction.dto.CustomerSearchResponseDto;
+import com.sas.sanction.entities.SanctionRequestData;
+
+
+@Component
+public class CustomerSearchHelper {
+
+	public List<CustomerSearchResponseDto> convertSearchResultsToResponse(List<SanctionRequestData> sanctionList) {
+		List<CustomerSearchResponseDto> list =  new ArrayList<CustomerSearchResponseDto>();
+		
+		for (SanctionRequestData sanction : sanctionList) {
+			CustomerSearchResponseDto dto = new CustomerSearchResponseDto();
+			dto.setCurrentSanctionStatus(sanction.getStatus());
+			dto.setCustomerNumber(sanction.getCustomerId());
+			dto.setDateOfBirth(sanction.getDateOfBirth());
+			dto.setFullName(sanction.getFullName());
+			dto.setLastScreeningDateTime(sanction.getUpdatedDttm());
+			dto.setNationalId(sanction.getUniqueId1());
+			dto.setCustomerUniqueId(sanction.getId());
+			
+			list.add(dto);
+		}
+		return list;
+	}
+
+	/*public SanctionRequestData convertRequestToEntity(CustomerSearchRequestDto customerSearchRequestDto) {
+		SanctionRequestData data = new  SanctionRequestData();
+
+		if(SanctionUtils.isStringNullorEmpty(customerSearchRequestDto.getCustomerNumber())) {
+			data.setCustomerId(customerSearchRequestDto.getCustomerNumber());
+		}
+		if(SanctionUtils.isStringNullorEmpty(customerSearchRequestDto.getName())) {
+			data.setFullName(customerSearchRequestDto.getName());
+		}
+		if(SanctionUtils.isStringNullorEmpty(customerSearchRequestDto.getNationalId())) {
+			data.setUniqueId1(customerSearchRequestDto.getNationalId());
+		}
+		if((customerSearchRequestDto.getScreenStartDate()!=null)) {
+			data.setCreatedDt(customerSearchRequestDto.getScreenStartDate());
+		}
+		if((customerSearchRequestDto.getScreenEndDate()!=null)) {
+			data.setUpdatedDt(customerSearchRequestDto.getScreenEndDate());
+		}
+		if(customerSearchRequestDto.getDob()!=null) {
+			data.setDateOfBirth(customerSearchRequestDto.getDob());
+		}
+		if(SanctionUtils.isStringNullorEmpty(customerSearchRequestDto.getSanctionStatus())) {
+			data.setStatus(customerSearchRequestDto.getSanctionStatus());
+		}
+		
+		return data;
+	}*/
+
+	
+	
+	
+}

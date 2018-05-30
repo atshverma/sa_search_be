@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	xmlns:tns="http://www.sanction.sas.com/webservices" targetNamespace="http://www.sanction.sas.com/webservices">
+	<xs:element name="sanction-request">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="request-type" type="xs:string"></xs:element>
+				<xs:element name="custinfo">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="custid" type="xs:string"></xs:element>
+							<xs:element name="segname" type="xs:string"></xs:element>
+							<xs:element name="fstname" type="xs:string"></xs:element>
+							<xs:element name="sname" type="xs:string"></xs:element>
+							<xs:element name="tname" type="xs:string"></xs:element>
+							<xs:element name="foname" type="xs:string"></xs:element>
+							<xs:element name="lname" type="xs:string"></xs:element>
+							<xs:element name="fname" type="xs:string"></xs:element>
+							<xs:element name="dob" type="xs:date"></xs:element>
+							<xs:element name="cob" type="xs:string"></xs:element>
+							<xs:element name="con" type="xs:string"></xs:element>
+							<xs:element name="custcat" type="xs:string"></xs:element>
+							<xs:element name="custsubcat" type="xs:string"></xs:element>
+							<xs:element name="taxid" type="xs:string"></xs:element>
+							<xs:element name="idtype1" type="xs:string"></xs:element>
+							<xs:element name="idnum1" type="xs:integer"></xs:element>
+							<xs:element name="mstatus" type="xs:string"></xs:element>
+							<xs:element name="idtype2" type="xs:string"></xs:element>
+							<xs:element name="idnum2" type="xs:integer"></xs:element>
+							<xs:element name="pepflag" type="xs:string"></xs:element>
+							<xs:element name="czship">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="country1" type="xs:string"></xs:element>
+										<xs:element name="country2" type="xs:string"></xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="coninfo">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="resinfo">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ad1" type="xs:string"></xs:element>
+													<xs:element name="ad2" type="xs:string"></xs:element>
+													<xs:element name="ad3" type="xs:string"></xs:element>
+													<xs:element name="city" type="xs:string"></xs:element>
+													<xs:element name="state" type="xs:string"></xs:element>
+													<xs:element name="zipcode" type="xs:string"></xs:element>
+													<xs:element name="countrycd" type="xs:string"></xs:element>
+													<xs:element name="countryname" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="mailinfo">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ad1" type="xs:string"></xs:element>
+													<xs:element name="ad2" type="xs:string"></xs:element>
+													<xs:element name="ad3" type="xs:string"></xs:element>
+													<xs:element name="city" type="xs:string"></xs:element>
+													<xs:element name="state" type="xs:string"></xs:element>
+													<xs:element name="zipcode" type="xs:string"></xs:element>
+													<xs:element name="countrycd" type="xs:string"></xs:element>
+													<xs:element name="countryname" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="phnumber">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ph1" type="xs:string"></xs:element>
+													<xs:element name="ph2" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="emails">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="priemail" type="xs:string"></xs:element>
+													<xs:element name="secemail" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="empcat" type="xs:string"></xs:element>
+							<xs:element name="empsubcat" type="xs:string"></xs:element>
+							<xs:element name="orgname1" type="xs:string"></xs:element>
+							<xs:element name="org1regnum" type="xs:string"></xs:element>
+							<xs:element name="orgname2" type="xs:string"></xs:element>
+							<xs:element name="org2regnum" type="xs:string"></xs:element>
+							<xs:element name="crescd" type="xs:string"></xs:element>
+							<xs:element name="cresname" type="xs:string"></xs:element>
+							<xs:element name="coc1cd" type="xs:string"></xs:element>
+							<xs:element name="coc1name" type="xs:string"></xs:element>
+							<xs:element name="coc2cd" type="xs:string"></xs:element>
+							<xs:element name="coc2name" type="xs:string"></xs:element>
+							<xs:element name="annualincome" type="xs:decimal"></xs:element>
+							<xs:element name="netwval" type="xs:decimal"></xs:element>
+							<xs:element name="lcdt" type="xs:date"></xs:element>
+							<xs:element name="lsarptdt" type="xs:date"></xs:element>
+							<xs:element name="lstxrptdt" type="xs:date"></xs:element>
+							<xs:element name="lradt" type="xs:date"></xs:element>
+							<xs:element name="rskcat" type="xs:string"></xs:element>
+							<xs:element name="custsncdt" type="xs:date"></xs:element>
+							<xs:element name="sflag" type="xs:string"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="applicationdetails">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="appnum" type="xs:string"></xs:element>
+							<xs:element name="apptype" type="xs:string"></xs:element>
+							<xs:element name="appstcat" type="xs:string"></xs:element>
+							<xs:element name="appstsubcat" type="xs:string"></xs:element>
+							<xs:element name="custnum" type="xs:string"></xs:element>
+							<xs:element name="accnum" type="xs:string"></xs:element>
+							<xs:element name="laccnum" type="xs:string"></xs:element>
+							<xs:element name="resid" type="xs:string"></xs:element>
+							<xs:element name="fstname" type="xs:string"></xs:element>
+							<xs:element name="sname" type="xs:string"></xs:element>
+							<xs:element name="tname" type="xs:string"></xs:element>
+							<xs:element name="foname" type="xs:string"></xs:element>
+							<xs:element name="lname" type="xs:string"></xs:element>
+							<xs:element name="fname" type="xs:string"></xs:element>
+							<xs:element name="dob" type="xs:date"></xs:element>
+							<xs:element name="cob" type="xs:string"></xs:element>
+							<xs:element name="con" type="xs:string"></xs:element>
+							<xs:element name="czship">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="country1" type="xs:string"></xs:element>
+										<xs:element name="country2" type="xs:string"></xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="coninfo">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="resinfo">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ad1" type="xs:string"></xs:element>
+													<xs:element name="ad2" type="xs:string"></xs:element>
+													<xs:element name="ad3" type="xs:string"></xs:element>
+													<xs:element name="city" type="xs:string"></xs:element>
+													<xs:element name="state" type="xs:string"></xs:element>
+													<xs:element name="zipcode" type="xs:string"></xs:element>
+													<xs:element name="countrycd" type="xs:string"></xs:element>
+													<xs:element name="countryname" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="mailinfo">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ad1" type="xs:string"></xs:element>
+													<xs:element name="ad2" type="xs:string"></xs:element>
+													<xs:element name="ad3" type="xs:string"></xs:element>
+													<xs:element name="city" type="xs:string"></xs:element>
+													<xs:element name="state" type="xs:string"></xs:element>
+													<xs:element name="zipcode" type="xs:string"></xs:element>
+													<xs:element name="countrycd" type="xs:string"></xs:element>
+													<xs:element name="countryname" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="phnumber">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ph1" type="xs:string"></xs:element>
+													<xs:element name="ph2" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="emails">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="priemail" type="xs:string"></xs:element>
+													<xs:element name="secemail" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="crescd" type="xs:string"></xs:element>
+							<xs:element name="cresname" type="xs:string"></xs:element>
+							<xs:element name="coc1cd" type="xs:string"></xs:element>
+							<xs:element name="coc1name" type="xs:string"></xs:element>
+							<xs:element name="coc2cd" type="xs:string"></xs:element>
+							<xs:element name="coc2name" type="xs:string"></xs:element>
+							<xs:element name="contnum1" type="xs:string"></xs:element>
+							<xs:element name="contnum2" type="xs:string"></xs:element>
+							<xs:element name="nationality" type="xs:string"></xs:element>
+							<xs:element name="empdetails">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="designation" type="xs:string"></xs:element>
+										<xs:element name="email" type="xs:string"></xs:element>
+										<xs:element name="occupation" type="xs:string"></xs:element>
+										<xs:element name="occuptype" type="xs:string"></xs:element>
+										<xs:element name="ofcontnum" type="xs:string"></xs:element>
+										<xs:element name="emplname" type="xs:string"></xs:element>
+										<xs:element name="desg" type="xs:string"></xs:element>
+										<xs:element name="mnthsalary" type="xs:decimal"></xs:element>
+										<xs:element name="anuincme" type="xs:decimal"></xs:element>
+										<xs:element name="poservice" type="xs:string"></xs:element>
+										<xs:element name="empcat" type="xs:string"></xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="chnnelname" type="xs:string"></xs:element>
+							<xs:element name="channelid" type="xs:string"></xs:element>
+							<xs:element name="appuid" type="xs:string"></xs:element>
+							<xs:element name="rejuid" type="xs:string"></xs:element>
+							<xs:element name="apprejdtm" type="xs:dateTime"></xs:element>
+							<xs:element name="appreqdtm" type="xs:dateTime"></xs:element>
+							<xs:element name="appmoddtm" type="xs:dateTime"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="transaction-details">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="txntypenum" type="xs:string"></xs:element>
+							<xs:element name="custsno" type="xs:string"></xs:element>
+							<xs:element name="accsno" type="xs:string"></xs:element>
+							<xs:element name="bsno" type="xs:string"></xs:element>
+							<xs:element name="staffsno" type="xs:string"></xs:element>
+							<xs:element name="cdflag" type="xs:string"></xs:element>
+							<xs:element name="txamt" type="xs:decimal"></xs:element>
+							<xs:element name="txtype" type="xs:string"></xs:element>
+							<xs:element name="txflag" type="xs:string"></xs:element>
+							<xs:element name="trnx-cat" type="xs:string"></xs:element>
+							<xs:element name="custnum" type="xs:string"></xs:element>
+							<xs:element name="secaccsno" type="xs:string"></xs:element>
+							<xs:element name="secprtysno" type="xs:string"></xs:element>
+							<xs:element name="txorgcntrynum" type="xs:string"></xs:element>
+							<xs:element name="txdestcntrynum" type="xs:string"></xs:element>
+							<xs:element name="relind" type="xs:string"></xs:element>
+							<xs:element name="txamtloc" type="xs:string"></xs:element>
+							<xs:element name="txamtaccur" type="xs:string"></xs:element>
+							<xs:element name="txamttxcur" type="xs:string"></xs:element>
+							<xs:element name="txextm" type="xs:time"></xs:element>
+							<xs:element name="txexdt" type="xs:date"></xs:element>
+							<xs:element name="txpotm" type="xs:time"></xs:element>
+							<xs:element name="txpodt" type="xs:date"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="acountdetails">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="segname" type="xs:string"></xs:element>
+							<xs:element name="accnum" type="xs:string"></xs:element>
+							<xs:element name="accname" type="xs:string"></xs:element>
+							<xs:element name="acctype" type="xs:string"></xs:element>
+							<xs:element name="accsubtype" type="xs:string"></xs:element>
+							<xs:element name="accurcd" type="xs:string"></xs:element>
+							<xs:element name="accurname" type="xs:string"></xs:element>
+							<xs:element name="accodt" type="xs:date"></xs:element>
+							<xs:element name="acccdt" type="xs:date"></xs:element>
+							<xs:element name="accstatus" type="xs:string"></xs:element>
+							<xs:element name="dorind" type="xs:string"></xs:element>
+							<xs:element name="ldordt" type="xs:date"></xs:element>
+							<xs:element name="pctname" type="xs:string"></xs:element>
+							<xs:element name="pctcd1" type="xs:string"></xs:element>
+							<xs:element name="pctcd2" type="xs:string"></xs:element>
+							<xs:element name="taxid" type="xs:string"></xs:element>
+							<xs:element name="accopbrname" type="xs:string"></xs:element>
+							<xs:element name="mailinfo">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ad1" type="xs:string"></xs:element>
+										<xs:element name="ad2" type="xs:string"></xs:element>
+										<xs:element name="ad3" type="xs:string"></xs:element>
+										<xs:element name="city" type="xs:string"></xs:element>
+										<xs:element name="state" type="xs:string"></xs:element>
+										<xs:element name="zipcode" type="xs:string"></xs:element>
+										<xs:element name="countrycd" type="xs:string"></xs:element>
+										<xs:element name="countryname" type="xs:string"></xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="liaccnum" type="xs:string"></xs:element>
+							<xs:element name="liaccrel" type="xs:string"></xs:element>
+							<xs:element name="orglamtval" type="xs:string"></xs:element>
+							<xs:element name="matudt" type="xs:date"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="expartydetals">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="segname" type="xs:string"></xs:element>
+							<xs:element name="exptnum" type="xs:string"></xs:element>
+							<xs:element name="exptcat" type="xs:string"></xs:element>
+							<xs:element name="exptscat" type="xs:string"></xs:element>
+							<xs:element name="idtyp1" type="xs:string"></xs:element>
+							<xs:element name="idnum1" type="xs:string"></xs:element>
+							<xs:element name="fstname" type="xs:string"></xs:element>
+							<xs:element name="sname" type="xs:string"></xs:element>
+							<xs:element name="tname" type="xs:string"></xs:element>
+							<xs:element name="foname" type="xs:string"></xs:element>
+							<xs:element name="lname" type="xs:string"></xs:element>
+							<xs:element name="fname" type="xs:string"></xs:element>
+							<xs:element name="dob" type="xs:date"></xs:element>
+							<xs:element name="coninfo">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="resinfo">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ad1" type="xs:string"></xs:element>
+													<xs:element name="ad2" type="xs:string"></xs:element>
+													<xs:element name="ad3" type="xs:string"></xs:element>
+													<xs:element name="city" type="xs:string"></xs:element>
+													<xs:element name="state" type="xs:string"></xs:element>
+													<xs:element name="zipcode" type="xs:string"></xs:element>
+													<xs:element name="countrycd" type="xs:string"></xs:element>
+													<xs:element name="countryname" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="contnum" type="xs:string"></xs:element>
+							<xs:element name="emailid" type="xs:string"></xs:element>
+							<xs:element name="orgname" type="xs:string"></xs:element>
+							<xs:element name="corcd" type="xs:string"></xs:element>
+							<xs:element name="corn" type="xs:string"></xs:element>
+							<xs:element name="cocz1cd" type="xs:string"></xs:element>
+							<xs:element name="cocz1nm" type="xs:string"></xs:element>
+							<xs:element name="cocz2cd" type="xs:string"></xs:element>
+							<xs:element name="cocz2nm" type="xs:string"></xs:element>
+							<xs:element name="anuincm" type="xs:string"></xs:element>
+							<xs:element name="netwval" type="xs:string"></xs:element>
+							<xs:element name="rcat" type="xs:string"></xs:element>
+							<xs:element name="rscat" type="xs:string"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="branch">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="branchnum" type="xs:string"></xs:element>
+							<xs:element name="branchname" type="xs:string"></xs:element>
+							<xs:element name="segname" type="xs:string"></xs:element>
+							<xs:element name="brcatg" type="xs:string"></xs:element>
+							<xs:element name="brscatg" type="xs:string"></xs:element>
+							<xs:element name="brcontname" type="xs:string"></xs:element>
+							<xs:element name="brcontnum" type="xs:string"></xs:element>
+							<xs:element name="brconinfo">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ad1" type="xs:string"></xs:element>
+										<xs:element name="ad2" type="xs:string"></xs:element>
+										<xs:element name="ad3" type="xs:string"></xs:element>
+										<xs:element name="city" type="xs:string"></xs:element>
+										<xs:element name="state" type="xs:string"></xs:element>
+										<xs:element name="zipcode" type="xs:string"></xs:element>
+										<xs:element name="countrycd" type="xs:string"></xs:element>
+										<xs:element name="countryname" type="xs:string"></xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="staff">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="stfnum" type="xs:string"></xs:element>
+							<xs:element name="segname" type="xs:string"></xs:element>
+							<xs:element name="stfcat" type="xs:string"></xs:element>
+							<xs:element name="stscat" type="xs:string"></xs:element>
+							<xs:element name="taxid" type="xs:string"></xs:element>
+							<xs:element name="idtype1" type="xs:string"></xs:element>
+							<xs:element name="idnum1" type="xs:string"></xs:element>
+							<xs:element name="idtyp2" type="xs:string"></xs:element>
+							<xs:element name="idnum2" type="xs:string"></xs:element>
+							<xs:element name="dob" type="xs:date"></xs:element>
+							<xs:element name="mstatus" type="xs:string"></xs:element>
+							<xs:element name="pflag" type="xs:string"></xs:element>
+							<xs:element name="coninfo">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="resinfo">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="ad1" type="xs:string"></xs:element>
+													<xs:element name="ad2" type="xs:string"></xs:element>
+													<xs:element name="ad3" type="xs:string"></xs:element>
+													<xs:element name="city" type="xs:string"></xs:element>
+													<xs:element name="state" type="xs:string"></xs:element>
+													<xs:element name="zipcode" type="xs:string"></xs:element>
+													<xs:element name="countrycd" type="xs:string"></xs:element>
+													<xs:element name="countryname" type="xs:string"></xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="mailinfo">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ad1" type="xs:string"></xs:element>
+										<xs:element name="ad2" type="xs:string"></xs:element>
+										<xs:element name="ad3" type="xs:string"></xs:element>
+										<xs:element name="city" type="xs:string"></xs:element>
+										<xs:element name="state" type="xs:string"></xs:element>
+										<xs:element name="zipcode" type="xs:string"></xs:element>
+										<xs:element name="countrycd" type="xs:string"></xs:element>
+										<xs:element name="countryname" type="xs:string"></xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="contnum" type="xs:string"></xs:element>
+							<xs:element name="emailid" type="xs:string"></xs:element>
+							<xs:element name="corcd" type="xs:string"></xs:element>
+							<xs:element name="corn" type="xs:string"></xs:element>
+							<xs:element name="cocz1cd" type="xs:string"></xs:element>
+							<xs:element name="cocz1nm" type="xs:string"></xs:element>
+							<xs:element name="cocz2cd" type="xs:string"></xs:element>
+							<xs:element name="cocz2nm" type="xs:string"></xs:element>
+							<xs:element name="anuincm" type="xs:string"></xs:element>
+							<xs:element name="netwval" type="xs:string"></xs:element>
+							<xs:element name="rcat" type="xs:string"></xs:element>
+							<xs:element name="rscat" type="xs:string"></xs:element>
+							<xs:element name="stsdt" type="xs:date"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="countrycur">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="cnnum" type="xs:string"></xs:element>
+							<xs:element name="cnname" type="xs:string"></xs:element>
+							<xs:element name="curcode" type="xs:string"></xs:element>
+							<xs:element name="ccode" type="xs:string"></xs:element>
+							<xs:element name="ccode3" type="xs:string"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="accountprofile">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="accnum" type="xs:string"></xs:element>
+							<xs:element name="month" type="xs:string"></xs:element>
+							<xs:element name="year" type="xs:string"></xs:element>
+							<xs:element name="tavamt" type="xs:decimal"></xs:element>
+							<xs:element name="tatc" type="xs:string"></xs:element>
+							<xs:element name="mavamt" type="xs:decimal"></xs:element>
+							<xs:element name="miavamt" type="xs:decimal"></xs:element>
+							<xs:element name="avgavamt" type="xs:decimal"></xs:element>
+							<xs:element name="tcta" type="xs:string"></xs:element>
+							<xs:element name="tctc" type="xs:string"></xs:element>
+							<xs:element name="mcta" type="xs:string"></xs:element>
+							<xs:element name="micta" type="xs:string"></xs:element>
+							<xs:element name="avcta" type="xs:string"></xs:element>
+							<xs:element name="tdta" type="xs:string"></xs:element>
+							<xs:element name="tdtc" type="xs:string"></xs:element>
+							<xs:element name="mdta" type="xs:string"></xs:element>
+							<xs:element name="midta" type="xs:string"></xs:element>
+							<xs:element name="avdta" type="xs:string"></xs:element>
+							<xs:element name="cta" type="xs:string"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="transactiontype">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="trnxtype" type="xs:string"></xs:element>
+							<xs:element name="txncat" type="xs:string"></xs:element>
+							<xs:element name="txnflag" type="xs:string"></xs:element>
+							<xs:element name="servname" type="xs:string"></xs:element>
+							<xs:element name="prodname" type="xs:string"></xs:element>
+							<xs:element name="prodmed" type="xs:string"></xs:element>
+							<xs:element name="channelname" type="xs:string"></xs:element>
+							<xs:element name="channelmed" type="xs:string"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="acctbalance">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="accnum" type="xs:string"></xs:element>
+							<xs:element name="obalance" type="xs:decimal"></xs:element>
+							<xs:element name="cubalance" type="xs:decimal"></xs:element>
+							<xs:element name="clbalance" type="xs:decimal"></xs:element>
+							<xs:element name="baldttm" type="xs:time"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="sanction-response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customer-id" type="xs:string"></xs:element>
+				<xs:element name="transaction-number" type="xs:string"></xs:element>
+				<xs:element name="case-id" type="xs:string"></xs:element>
+				<xs:element name="status" type="xs:string"></xs:element>
+				<xs:element name="list-name" type="xs:string"></xs:element>
+				<xs:element name="response-code" type="xs:integer"></xs:element>
+				<xs:element name="response-desc" type="xs:string"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

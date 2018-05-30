@@ -1,0 +1,111 @@
+package com.sas.sanction.entities;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+import org.hibernate.annotations.GenericGenerator;
+
+
+/**
+ * The persistent class for the sanction_customer_response database table.
+ * 
+ */
+@Entity
+@Table(name="sanction_customer_response")
+@NamedQuery(name="SanctionCustomerResponse.findAll", query="SELECT s FROM SanctionCustomerResponse s")
+public class SanctionCustomerResponse  extends BaseEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GenericGenerator(name = "scresp", strategy="increment")
+	@GeneratedValue(generator = "scresp")
+	private int sno;
+
+	@Column(name="case_id")
+	private String caseId;
+
+	@Column(name="customer_id")
+	private String customerId;
+
+	@Column(name="list_name")
+	private String listName;
+
+	@Column(name="response_code")
+	private String responseCode;
+
+	@Column(name="response_desc")
+	private String responseDesc;
+
+	private String status;
+
+	@Column(name="transaction_no")
+	private String transactionNo;
+
+	public SanctionCustomerResponse() {
+	}
+
+	public int getSno() {
+		return this.sno;
+	}
+
+	public void setSno(int sno) {
+		this.sno = sno;
+	}
+
+	public String getCaseId() {
+		return this.caseId;
+	}
+
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
+	}
+
+	public String getCustomerId() {
+		return this.customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getListName() {
+		return this.listName;
+	}
+
+	public void setListName(String listName) {
+		this.listName = listName;
+	}
+
+	public String getResponseCode() {
+		return this.responseCode;
+	}
+
+	public void setResponseCode(String responseCode) {
+		this.responseCode = responseCode;
+	}
+
+	public String getResponseDesc() {
+		return this.responseDesc;
+	}
+
+	public void setResponseDesc(String responseDesc) {
+		this.responseDesc = responseDesc;
+	}
+
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getTransactionNo() {
+		return this.transactionNo;
+	}
+
+	public void setTransactionNo(String transactionNo) {
+		this.transactionNo = transactionNo;
+	}
+
+}

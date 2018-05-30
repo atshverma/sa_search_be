@@ -1,0 +1,45 @@
+package com.sas.sanction.endpoints;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
+
+import com.sas.sanction.dao.SanctionRequestDao;
+import com.sas.sanction.webservices.SanctionRequest;
+import com.sas.sanction.webservices.SanctionResponse;
+
+@Endpoint
+public class SanctionDataEndpoint 
+{	
+	private static final String NAMESPACE_URI = "http://www.sanction.sas.com/webservices";
+	private SanctionRequestDao sanctionRequestDao;
+	
+	@Autowired
+	public SanctionDataEndpoint(SanctionRequestDao sanctionRequestDao)
+	{
+		this.sanctionRequestDao = sanctionRequestDao;
+	}
+
+	@PayloadRoot(namespace=NAMESPACE_URI, localPart="getSanctionDataRequest")
+	@ResponsePayload
+	public SanctionResponse getSanctionData(@RequestPayload SanctionRequest request)
+	{
+		SanctionResponse response = new SanctionResponse();
+		
+		response.setStatus("SUCCESS");
+		return response;
+	}
+	
+	/*@PayloadRoot(namespace=NAMESPACE_URI, localPart="sanction-request")
+	@ResponsePayload
+	public GetSanctionDataResponse getSanctionData1(@RequestPayload SanctionRequest request)
+	{
+		request.get
+		GetSanctionDataResponse response = new GetSanctionDataResponse();
+		
+		response.setStatus("SUCCESS");
+		return response;
+	}*/
+}

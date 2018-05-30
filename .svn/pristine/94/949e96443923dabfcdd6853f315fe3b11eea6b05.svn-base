@@ -1,0 +1,30 @@
+package com.sas.sanction.helper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.sas.sanction.dto.MatchingStrengthDto;
+import com.sas.sanction.entities.MatchingAttributeConfig;
+
+@Component
+public class MatchingStrengthHelper {
+
+	public List<MatchingStrengthDto> convertEntityToResponse(List<MatchingAttributeConfig> matchingStrengthList) {
+		List<MatchingStrengthDto> responseList = new ArrayList<>();
+		
+		for (MatchingAttributeConfig attributes : matchingStrengthList) {
+			MatchingStrengthDto response =  new MatchingStrengthDto();
+			
+//			response.setSno(attributes.getId());
+			response.setMatchingFieldName(attributes.getRequestAttributeName());
+			response.setMatchType(attributes.getMatchType());
+			
+			responseList.add(response);
+		}
+		
+		return responseList;
+	}
+
+}

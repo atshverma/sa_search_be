@@ -1,0 +1,33 @@
+package com.sas.sanction.helper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.sas.sanction.dto.CustomerSearchResponseDto;
+import com.sas.sanction.entities.SanctionCustomer;
+
+
+@Component
+public class CustomerSearchHelper {
+
+	public List<CustomerSearchResponseDto> convertSearchResultsToResponse(List<SanctionCustomer> sanctionList) {
+		List<CustomerSearchResponseDto> list =  new ArrayList<CustomerSearchResponseDto>();
+		
+		for (SanctionCustomer sanction : sanctionList) {
+			CustomerSearchResponseDto dto = new CustomerSearchResponseDto();
+			dto.setCurrentSanctionStatus(sanction.getStatus());
+			dto.setCustomerNumber(sanction.getCustomerId());
+			dto.setDateOfBirth(sanction.getDateOfBirth());
+			dto.setFullName(sanction.getFullName());
+			dto.setLastScreeningDateTime(sanction.getUpdatedDttm());
+			dto.setNationalId(sanction.getUniqueId1());
+			
+			list.add(dto);
+		}
+		return list;
+	}
+
+	
+}

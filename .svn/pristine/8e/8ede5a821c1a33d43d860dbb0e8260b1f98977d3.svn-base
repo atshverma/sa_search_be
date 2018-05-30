@@ -1,0 +1,9 @@
+package com.sas.sanction.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.sas.sanction.entities.StaffDimNcore;
+
+public interface StaffDimNcoreDao extends JpaRepository<StaffDimNcore, Double>{
+
+}

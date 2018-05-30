@@ -1,0 +1,233 @@
+package com.sas.sanction.entities;
+
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+
+/**
+ * The persistent class for the tran_dim_ncore database table.
+ * 
+ */
+@Entity
+@Table(name="tran_dim_ncore")
+@NamedQuery(name="TranDimNcore.findAll", query="SELECT t FROM TranDimNcore t")
+public class TranDimNcore extends BaseEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="TXN_SNO")
+	private long txnSno;
+
+	@Column(name="CHANNEL_ID")
+	private String channelId;
+
+	@Column(name="CHANNEL_NAME")
+	private String channelName;
+
+	@Column(name="CREATED_BY")
+	private String createdBy;
+
+	@Column(name="CREATED_DT")
+	private Date createdDt;
+
+	@Column(name="CREATED_DTTM")
+	private Timestamp createdDttm;
+
+	@Column(name="NARRATIVE_1")
+	private String narrative1;
+
+	@Column(name="NARRATIVE_2")
+	private String narrative2;
+
+	@Column(name="NARRATIVE_3")
+	private String narrative3;
+
+	@Column(name="TXN_PTRN_NUM")
+	private String txnPtrnNum;
+
+	@Column(name="TXN_REF_NUM")
+	private String txnRefNum;
+
+	@Column(name="TXN_STATUS")
+	private String txnStatus;
+
+	@Column(name="UPDTD_BY")
+	private String updtdBy;
+
+	@Column(name="UPDTD_DT")
+	private Date updtdDt;
+
+	@Column(name="UPDTD_DTTM")
+	private Timestamp updtdDttm;
+
+	//bi-directional one-to-one association to NonFinTranFactNcore
+	@OneToOne(mappedBy = "tranDimNcore")
+	private NonFinTranFactNcore nonFinTranFactNcore;
+
+	@OneToMany(mappedBy="tranDimNcore")
+	private List<FinTranFactNcore> finTranFactNcores;
+
+	public TranDimNcore() {
+	}
+
+	public long getTxnSno() {
+		return this.txnSno;
+	}
+
+	public void setTxnSno(long txnSno) {
+		this.txnSno = txnSno;
+	}
+
+	public String getChannelId() {
+		return this.channelId;
+	}
+
+	public void setChannelId(String channelId) {
+		this.channelId = channelId;
+	}
+
+	public String getChannelName() {
+		return this.channelName;
+	}
+
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
+	}
+
+	public String getCreatedBy() {
+		return this.createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getCreatedDt() {
+		return this.createdDt;
+	}
+
+	public void setCreatedDt(Date createdDt) {
+		this.createdDt = createdDt;
+	}
+
+	public Timestamp getCreatedDttm() {
+		return this.createdDttm;
+	}
+
+	public void setCreatedDttm(Timestamp createdDttm) {
+		this.createdDttm = createdDttm;
+	}
+
+	public String getNarrative1() {
+		return this.narrative1;
+	}
+
+	public void setNarrative1(String narrative1) {
+		this.narrative1 = narrative1;
+	}
+
+	public String getNarrative2() {
+		return this.narrative2;
+	}
+
+	public void setNarrative2(String narrative2) {
+		this.narrative2 = narrative2;
+	}
+
+	public String getNarrative3() {
+		return this.narrative3;
+	}
+
+	public void setNarrative3(String narrative3) {
+		this.narrative3 = narrative3;
+	}
+
+	public String getTxnPtrnNum() {
+		return this.txnPtrnNum;
+	}
+
+	public void setTxnPtrnNum(String txnPtrnNum) {
+		this.txnPtrnNum = txnPtrnNum;
+	}
+
+	public String getTxnRefNum() {
+		return this.txnRefNum;
+	}
+
+	public void setTxnRefNum(String txnRefNum) {
+		this.txnRefNum = txnRefNum;
+	}
+
+	public String getTxnStatus() {
+		return this.txnStatus;
+	}
+
+	public void setTxnStatus(String txnStatus) {
+		this.txnStatus = txnStatus;
+	}
+
+	public String getUpdtdBy() {
+		return this.updtdBy;
+	}
+
+	public void setUpdtdBy(String updtdBy) {
+		this.updtdBy = updtdBy;
+	}
+
+	public Date getUpdtdDt() {
+		return this.updtdDt;
+	}
+
+	public void setUpdtdDt(Date updtdDt) {
+		this.updtdDt = updtdDt;
+	}
+
+	public Timestamp getUpdtdDttm() {
+		return this.updtdDttm;
+	}
+
+	public void setUpdtdDttm(Timestamp updtdDttm) {
+		this.updtdDttm = updtdDttm;
+	}
+
+	public NonFinTranFactNcore getNonFinTranFactNcore() {
+		return this.nonFinTranFactNcore;
+	}
+
+	public void setNonFinTranFactNcore(NonFinTranFactNcore nonFinTranFactNcore) {
+		this.nonFinTranFactNcore = nonFinTranFactNcore;
+	}
+	
+	public List<FinTranFactNcore> getFinTranFactNcores() {
+		return this.finTranFactNcores;
+	}
+
+	public void setFinTranFactNcores(List<FinTranFactNcore> finTranFactNcores) {
+		this.finTranFactNcores = finTranFactNcores;
+	}
+
+	public FinTranFactNcore addFinTranFactNcore(FinTranFactNcore finTranFactNcore) {
+		getFinTranFactNcores().add(finTranFactNcore);
+		finTranFactNcore.setTranDimNcore(this);
+
+		return finTranFactNcore;
+	}
+
+	public FinTranFactNcore removeFinTranFactNcore(FinTranFactNcore finTranFactNcore) {
+		getFinTranFactNcores().remove(finTranFactNcore);
+		finTranFactNcore.setTranDimNcore(null);
+
+		return finTranFactNcore;
+	}
+
+}

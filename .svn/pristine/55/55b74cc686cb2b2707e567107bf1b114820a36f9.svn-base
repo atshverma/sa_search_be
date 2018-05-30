@@ -1,0 +1,475 @@
+package com.sas.sanction.entities;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+/**
+ * The persistent class for the ext_party_dim_ncore database table.
+ * 
+ */
+@Entity
+@Table(name="ext_party_dim_ncore")
+@NamedQuery(name="ExtPartyDimNcore.findAll", query="SELECT e FROM ExtPartyDimNcore e")
+public class ExtPartyDimNcore extends BaseEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="EXT_PARTY_SNO")
+	private long extPartySno;
+
+	@Column(name="ADDR_CITY")
+	private String addrCity;
+
+	@Column(name="ADDR_CNTRY_CD")
+	private String addrCntryCd;
+
+	@Column(name="ADDR_CNTRY_NAME")
+	private String addrCntryName;
+
+	@Column(name="ADDR_LINE_1")
+	private String addrLine1;
+
+	@Column(name="ADDR_LINE_2")
+	private String addrLine2;
+
+	@Column(name="ADDR_LINE_3")
+	private String addrLine3;
+
+	@Column(name="ADDR_POSTAL_CD")
+	private String addrPostalCd;
+
+	@Column(name="ADDR_STATE")
+	private String addrState;
+
+	@Column(name="ANNUAL_INCOME")
+	private BigDecimal annualIncome;
+
+	@Column(name="CNTRY_OF_CITIZENSHIP_1_CD")
+	private String cntryOfCitizenship1Cd;
+
+	@Column(name="CNTRY_OF_CITIZENSHIP_1_NAME")
+	private String cntryOfCitizenship1Name;
+
+	@Column(name="CNTRY_OF_CITIZENSHIP_2_CD")
+	private String cntryOfCitizenship2Cd;
+
+	@Column(name="CNTRY_OF_CITIZENSHIP_2_NAME")
+	private String cntryOfCitizenship2Name;
+
+	@Column(name="CNTRY_OF_RESIDENCY_CD")
+	private String cntryOfResidencyCd;
+
+	@Column(name="CNTRY_OF_RESIDENCY_NAME")
+	private String cntryOfResidencyName;
+
+	@Column(name="CONTACT_NUM")
+	private String contactNum;
+
+	@Column(name="DOB")
+	private Date dob;
+
+	@Column(name="EMAIL_ID")
+	private String emailId;
+
+	@Column(name="EXT_PARTY_CAT")
+	private String extPartyCat;
+
+	@Column(name="EXT_PARTY_NUM")
+	private String extPartyNum;
+
+	@Column(name="EXT_PARTY_SUB_CAT")
+	private String extPartySubCat;
+
+	@Column(name="FIRST_NAME")
+	private String firstName;
+
+	@Column(name="FOURTH_NAME")
+	private String fourthName;
+
+	@Column(name="FULL_NAME")
+	private String fullName;
+
+	@Column(name="ID_NUM_1")
+	private String idNum1;
+
+	@Column(name="ID_TYP_1")
+	private String idTyp1;
+
+	@Column(name="LAST_NAME")
+	private String lastName;
+
+	@Column(name="NET_WORTH_VAL")
+	private BigDecimal netWorthVal;
+
+	@Column(name="ORG_NAME")
+	private String orgName;
+
+	@Column(name="ORG_REGISTERATION_NUM")
+	private String orgRegisterationNum;
+
+	@Column(name="PEP_FLAG")
+	private String pepFlag;
+
+	@Column(name="RISK_CAT")
+	private String riskCat;
+
+	@Column(name="RISK_SUB_CAT")
+	private String riskSubCat;
+
+	@Column(name="SECOND_NAME")
+	private String secondName;
+
+	@Column(name="SEGMENT_NAME")
+	private String segmentName;
+
+	@Column(name="THIRD_NAME")
+	private String thirdName;
+
+	//bi-directional many-to-one association to NonFinTranFactNcore
+	@OneToMany(mappedBy="extPartyDimNcore")
+	private List<NonFinTranFactNcore> nonFinTranFactNcores;
+
+	@OneToMany(mappedBy="extParyDimNcore")
+	private List<FinTranFactNcore> finTranFactNcores;
+
+
+	public ExtPartyDimNcore() {
+	}
+
+	public long getExtPartySno() {
+		return this.extPartySno;
+	}
+
+	public void setExtPartySno(long extPartySno) {
+		this.extPartySno = extPartySno;
+	}
+
+	public String getAddrCity() {
+		return this.addrCity;
+	}
+
+	public void setAddrCity(String addrCity) {
+		this.addrCity = addrCity;
+	}
+
+	public String getAddrCntryCd() {
+		return this.addrCntryCd;
+	}
+
+	public void setAddrCntryCd(String addrCntryCd) {
+		this.addrCntryCd = addrCntryCd;
+	}
+
+	public String getAddrCntryName() {
+		return this.addrCntryName;
+	}
+
+	public void setAddrCntryName(String addrCntryName) {
+		this.addrCntryName = addrCntryName;
+	}
+
+	public String getAddrLine1() {
+		return this.addrLine1;
+	}
+
+	public void setAddrLine1(String addrLine1) {
+		this.addrLine1 = addrLine1;
+	}
+
+	public String getAddrLine2() {
+		return this.addrLine2;
+	}
+
+	public void setAddrLine2(String addrLine2) {
+		this.addrLine2 = addrLine2;
+	}
+
+	public String getAddrLine3() {
+		return this.addrLine3;
+	}
+
+	public void setAddrLine3(String addrLine3) {
+		this.addrLine3 = addrLine3;
+	}
+
+	public String getAddrPostalCd() {
+		return this.addrPostalCd;
+	}
+
+	public void setAddrPostalCd(String addrPostalCd) {
+		this.addrPostalCd = addrPostalCd;
+	}
+
+	public String getAddrState() {
+		return this.addrState;
+	}
+
+	public void setAddrState(String addrState) {
+		this.addrState = addrState;
+	}
+
+	public BigDecimal getAnnualIncome() {
+		return this.annualIncome;
+	}
+
+	public void setAnnualIncome(BigDecimal annualIncome) {
+		this.annualIncome = annualIncome;
+	}
+
+	public String getCntryOfCitizenship1Cd() {
+		return this.cntryOfCitizenship1Cd;
+	}
+
+	public void setCntryOfCitizenship1Cd(String cntryOfCitizenship1Cd) {
+		this.cntryOfCitizenship1Cd = cntryOfCitizenship1Cd;
+	}
+
+	public String getCntryOfCitizenship1Name() {
+		return this.cntryOfCitizenship1Name;
+	}
+
+	public void setCntryOfCitizenship1Name(String cntryOfCitizenship1Name) {
+		this.cntryOfCitizenship1Name = cntryOfCitizenship1Name;
+	}
+
+	public String getCntryOfCitizenship2Cd() {
+		return this.cntryOfCitizenship2Cd;
+	}
+
+	public void setCntryOfCitizenship2Cd(String cntryOfCitizenship2Cd) {
+		this.cntryOfCitizenship2Cd = cntryOfCitizenship2Cd;
+	}
+
+	public String getCntryOfCitizenship2Name() {
+		return this.cntryOfCitizenship2Name;
+	}
+
+	public void setCntryOfCitizenship2Name(String cntryOfCitizenship2Name) {
+		this.cntryOfCitizenship2Name = cntryOfCitizenship2Name;
+	}
+
+	public String getCntryOfResidencyCd() {
+		return this.cntryOfResidencyCd;
+	}
+
+	public void setCntryOfResidencyCd(String cntryOfResidencyCd) {
+		this.cntryOfResidencyCd = cntryOfResidencyCd;
+	}
+
+	public String getCntryOfResidencyName() {
+		return this.cntryOfResidencyName;
+	}
+
+	public void setCntryOfResidencyName(String cntryOfResidencyName) {
+		this.cntryOfResidencyName = cntryOfResidencyName;
+	}
+
+	public String getContactNum() {
+		return this.contactNum;
+	}
+
+	public void setContactNum(String contactNum) {
+		this.contactNum = contactNum;
+	}
+
+	public Date getDob() {
+		return this.dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getEmailId() {
+		return this.emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public String getExtPartyCat() {
+		return this.extPartyCat;
+	}
+
+	public void setExtPartyCat(String extPartyCat) {
+		this.extPartyCat = extPartyCat;
+	}
+
+	public String getExtPartyNum() {
+		return this.extPartyNum;
+	}
+
+	public void setExtPartyNum(String extPartyNum) {
+		this.extPartyNum = extPartyNum;
+	}
+
+	public String getExtPartySubCat() {
+		return this.extPartySubCat;
+	}
+
+	public void setExtPartySubCat(String extPartySubCat) {
+		this.extPartySubCat = extPartySubCat;
+	}
+
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getFourthName() {
+		return this.fourthName;
+	}
+
+	public void setFourthName(String fourthName) {
+		this.fourthName = fourthName;
+	}
+
+	public String getFullName() {
+		return this.fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getIdNum1() {
+		return this.idNum1;
+	}
+
+	public void setIdNum1(String idNum1) {
+		this.idNum1 = idNum1;
+	}
+
+	public String getIdTyp1() {
+		return this.idTyp1;
+	}
+
+	public void setIdTyp1(String idTyp1) {
+		this.idTyp1 = idTyp1;
+	}
+
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public BigDecimal getNetWorthVal() {
+		return this.netWorthVal;
+	}
+
+	public void setNetWorthVal(BigDecimal netWorthVal) {
+		this.netWorthVal = netWorthVal;
+	}
+
+	public String getOrgName() {
+		return this.orgName;
+	}
+
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
+
+	public String getOrgRegisterationNum() {
+		return this.orgRegisterationNum;
+	}
+
+	public void setOrgRegisterationNum(String orgRegisterationNum) {
+		this.orgRegisterationNum = orgRegisterationNum;
+	}
+
+	public String getPepFlag() {
+		return this.pepFlag;
+	}
+
+	public void setPepFlag(String pepFlag) {
+		this.pepFlag = pepFlag;
+	}
+
+	public String getRiskCat() {
+		return this.riskCat;
+	}
+
+	public void setRiskCat(String riskCat) {
+		this.riskCat = riskCat;
+	}
+
+	public String getRiskSubCat() {
+		return this.riskSubCat;
+	}
+
+	public void setRiskSubCat(String riskSubCat) {
+		this.riskSubCat = riskSubCat;
+	}
+
+	public String getSecondName() {
+		return this.secondName;
+	}
+
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
+	}
+
+	public String getSegmentName() {
+		return this.segmentName;
+	}
+
+	public void setSegmentName(String segmentName) {
+		this.segmentName = segmentName;
+	}
+
+	public String getThirdName() {
+		return this.thirdName;
+	}
+
+	public void setThirdName(String thirdName) {
+		this.thirdName = thirdName;
+	}
+
+	public List<NonFinTranFactNcore> getNonFinTranFactNcores() {
+		return this.nonFinTranFactNcores;
+	}
+
+	public void setNonFinTranFactNcores(List<NonFinTranFactNcore> nonFinTranFactNcores) {
+		this.nonFinTranFactNcores = nonFinTranFactNcores;
+	}
+
+	public NonFinTranFactNcore addNonFinTranFactNcore(NonFinTranFactNcore nonFinTranFactNcore) {
+		getNonFinTranFactNcores().add(nonFinTranFactNcore);
+		nonFinTranFactNcore.setExtPartyDimNcore(this);
+
+		return nonFinTranFactNcore;
+	}
+
+	public NonFinTranFactNcore removeNonFinTranFactNcore(NonFinTranFactNcore nonFinTranFactNcore) {
+		getNonFinTranFactNcores().remove(nonFinTranFactNcore);
+		nonFinTranFactNcore.setExtPartyDimNcore(null);
+
+		return nonFinTranFactNcore;
+	}
+
+	public List<FinTranFactNcore> getFinTranFactNcores() {
+		return this.finTranFactNcores;
+	}
+
+	public void setFinTranFactNcores(List<FinTranFactNcore> finTranFactNcores) {
+		this.finTranFactNcores = finTranFactNcores;
+	}
+}

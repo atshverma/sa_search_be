@@ -1,0 +1,499 @@
+package com.sas.sanction.entities;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+
+
+/**
+ * The persistent class for the sanction_customer database table.
+ * 
+ */
+@Entity
+@Table(name="sanction_customer")
+@NamedQuery(name="SanctionCustomer.findAll", query="SELECT s FROM SanctionCustomer s")
+public class SanctionCustomer  extends BaseEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="san_cust_sno")
+	private int sanCustSno;
+
+	@Column(name="case_id")
+	private String caseId;
+
+	@Column(name="country_of_birth")
+	private String countryOfBirth;
+
+	@Column(name="country_of_citizenship_1")
+	private String countryOfCitizenship1;
+
+	@Column(name="country_of_citizenship_2")
+	private String countryOfCitizenship2;
+
+	@Column(name="country_of_nationality")
+	private String countryOfNationality;
+
+	@Column(name="customer_id")
+	private String customerId;
+
+	@Column(name="date_of_birth")
+	private java.sql.Date dateOfBirth;
+
+	@Column(name="first_name")
+	private String firstName;
+
+	@Column(name="fourth_name")
+	private String fourthName;
+
+	@Column(name="full_name")
+	private String fullName;
+
+	@Column(name="last_name")
+	private String lastName;
+
+	@Column(name="list_name")
+	private String listName;
+
+	@Column(name="mail_address_city")
+	private String mailAddressCity;
+
+	@Column(name="mail_address_country")
+	private String mailAddressCountry;
+
+	@Column(name="mail_address_state")
+	private String mailAddressState;
+
+	@Column(name="mail_address_street_line_1")
+	private String mailAddressStreetLine1;
+
+	@Column(name="mail_address_street_line_2")
+	private String mailAddressStreetLine2;
+
+	@Column(name="mail_address_street_line_3")
+	private String mailAddressStreetLine3;
+
+	@Column(name="mail_address_zip_code")
+	private String mailAddressZipCode;
+
+	@Column(name="phone_number_1")
+	private String phoneNumber1;
+
+	@Column(name="phone_number_2")
+	private String phoneNumber2;
+
+	@Column(name="primary_email")
+	private String primaryEmail;
+
+	@Column(name="res_address_city")
+	private String resAddressCity;
+
+	@Column(name="res_address_country")
+	private String resAddressCountry;
+
+	@Column(name="res_address_state")
+	private String resAddressState;
+
+	@Column(name="res_address_street_line_1")
+	private String resAddressStreetLine1;
+
+	@Column(name="res_address_street_line_2")
+	private String resAddressStreetLine2;
+
+	@Column(name="res_address_street_line_3")
+	private String resAddressStreetLine3;
+
+	@Column(name="res_address_zip_code")
+	private String resAddressZipCode;
+
+	@Column(name="second_name")
+	private String secondName;
+
+	@Column(name="secondary_email")
+	private String secondaryEmail;
+
+	private String status;
+
+	@Column(name="third_name")
+	private String thirdName;
+
+	@Column(name="transaction_amount")
+	private BigDecimal transactionAmount;
+
+	@Column(name="transaction_no")
+	private String transactionNo;
+
+	@Column(name="transaction_type")
+	private String transactionType;
+
+	@Column(name="unique_id_1")
+	private String uniqueId1;
+
+	@Column(name="unique_id_2")
+	private String uniqueId2;
+
+	//bi-directional many-to-one association to SanctionCustomerVersion
+	@OneToMany(mappedBy="sanctionCustomer")
+	private List<SanctionCustomerVersion> sanctionCustomerVersions;
+
+	//bi-directional many-to-one association to MatchingOutcome
+	@OneToMany(mappedBy="sanctionCustomer")
+	private List<MatchingOutcome> matchingOutcomes;
+
+	
+	public SanctionCustomer() {
+	}
+
+	public int getSanCustSno() {
+		return this.sanCustSno;
+	}
+
+	public void setSanCustSno(int sanCustSno) {
+		this.sanCustSno = sanCustSno;
+	}
+
+	public String getCaseId() {
+		return this.caseId;
+	}
+
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
+	}
+
+	public String getCountryOfBirth() {
+		return this.countryOfBirth;
+	}
+
+	public void setCountryOfBirth(String countryOfBirth) {
+		this.countryOfBirth = countryOfBirth;
+	}
+
+	public String getCountryOfCitizenship1() {
+		return this.countryOfCitizenship1;
+	}
+
+	public void setCountryOfCitizenship1(String countryOfCitizenship1) {
+		this.countryOfCitizenship1 = countryOfCitizenship1;
+	}
+
+	public String getCountryOfCitizenship2() {
+		return this.countryOfCitizenship2;
+	}
+
+	public void setCountryOfCitizenship2(String countryOfCitizenship2) {
+		this.countryOfCitizenship2 = countryOfCitizenship2;
+	}
+
+	public String getCountryOfNationality() {
+		return this.countryOfNationality;
+	}
+
+	public void setCountryOfNationality(String countryOfNationality) {
+		this.countryOfNationality = countryOfNationality;
+	}
+
+	public String getCustomerId() {
+		return this.customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+
+
+	public java.sql.Date getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(java.sql.Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getFourthName() {
+		return this.fourthName;
+	}
+
+	public void setFourthName(String fourthName) {
+		this.fourthName = fourthName;
+	}
+
+	public String getFullName() {
+		return this.fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getListName() {
+		return this.listName;
+	}
+
+	public void setListName(String listName) {
+		this.listName = listName;
+	}
+
+	public String getMailAddressCity() {
+		return this.mailAddressCity;
+	}
+
+	public void setMailAddressCity(String mailAddressCity) {
+		this.mailAddressCity = mailAddressCity;
+	}
+
+	public String getMailAddressCountry() {
+		return this.mailAddressCountry;
+	}
+
+	public void setMailAddressCountry(String mailAddressCountry) {
+		this.mailAddressCountry = mailAddressCountry;
+	}
+
+	public String getMailAddressState() {
+		return this.mailAddressState;
+	}
+
+	public void setMailAddressState(String mailAddressState) {
+		this.mailAddressState = mailAddressState;
+	}
+
+	public String getMailAddressStreetLine1() {
+		return this.mailAddressStreetLine1;
+	}
+
+	public void setMailAddressStreetLine1(String mailAddressStreetLine1) {
+		this.mailAddressStreetLine1 = mailAddressStreetLine1;
+	}
+
+	public String getMailAddressStreetLine2() {
+		return this.mailAddressStreetLine2;
+	}
+
+	public void setMailAddressStreetLine2(String mailAddressStreetLine2) {
+		this.mailAddressStreetLine2 = mailAddressStreetLine2;
+	}
+
+	public String getMailAddressStreetLine3() {
+		return this.mailAddressStreetLine3;
+	}
+
+	public void setMailAddressStreetLine3(String mailAddressStreetLine3) {
+		this.mailAddressStreetLine3 = mailAddressStreetLine3;
+	}
+
+	public String getMailAddressZipCode() {
+		return this.mailAddressZipCode;
+	}
+
+	public void setMailAddressZipCode(String mailAddressZipCode) {
+		this.mailAddressZipCode = mailAddressZipCode;
+	}
+
+	public String getPhoneNumber1() {
+		return this.phoneNumber1;
+	}
+
+	public void setPhoneNumber1(String phoneNumber1) {
+		this.phoneNumber1 = phoneNumber1;
+	}
+
+	public String getPhoneNumber2() {
+		return this.phoneNumber2;
+	}
+
+	public void setPhoneNumber2(String phoneNumber2) {
+		this.phoneNumber2 = phoneNumber2;
+	}
+
+	public String getPrimaryEmail() {
+		return this.primaryEmail;
+	}
+
+	public void setPrimaryEmail(String primaryEmail) {
+		this.primaryEmail = primaryEmail;
+	}
+
+	public String getResAddressCity() {
+		return this.resAddressCity;
+	}
+
+	public void setResAddressCity(String resAddressCity) {
+		this.resAddressCity = resAddressCity;
+	}
+
+	public String getResAddressCountry() {
+		return this.resAddressCountry;
+	}
+
+	public void setResAddressCountry(String resAddressCountry) {
+		this.resAddressCountry = resAddressCountry;
+	}
+
+	public String getResAddressState() {
+		return this.resAddressState;
+	}
+
+	public void setResAddressState(String resAddressState) {
+		this.resAddressState = resAddressState;
+	}
+
+	public String getResAddressStreetLine1() {
+		return this.resAddressStreetLine1;
+	}
+
+	public void setResAddressStreetLine1(String resAddressStreetLine1) {
+		this.resAddressStreetLine1 = resAddressStreetLine1;
+	}
+
+	public String getResAddressStreetLine2() {
+		return this.resAddressStreetLine2;
+	}
+
+	public void setResAddressStreetLine2(String resAddressStreetLine2) {
+		this.resAddressStreetLine2 = resAddressStreetLine2;
+	}
+
+	public String getResAddressStreetLine3() {
+		return this.resAddressStreetLine3;
+	}
+
+	public void setResAddressStreetLine3(String resAddressStreetLine3) {
+		this.resAddressStreetLine3 = resAddressStreetLine3;
+	}
+
+	public String getResAddressZipCode() {
+		return this.resAddressZipCode;
+	}
+
+	public void setResAddressZipCode(String resAddressZipCode) {
+		this.resAddressZipCode = resAddressZipCode;
+	}
+
+	public String getSecondName() {
+		return this.secondName;
+	}
+
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
+	}
+
+	public String getSecondaryEmail() {
+		return this.secondaryEmail;
+	}
+
+	public void setSecondaryEmail(String secondaryEmail) {
+		this.secondaryEmail = secondaryEmail;
+	}
+
+	public String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getThirdName() {
+		return this.thirdName;
+	}
+
+	public void setThirdName(String thirdName) {
+		this.thirdName = thirdName;
+	}
+
+	public BigDecimal getTransactionAmount() {
+		return transactionAmount;
+	}
+
+	public void setTransactionAmount(BigDecimal transactionAmount) {
+		this.transactionAmount = transactionAmount;
+	}
+
+	public String getTransactionNo() {
+		return transactionNo;
+	}
+
+	public void setTransactionNo(String transactionNo) {
+		this.transactionNo = transactionNo;
+	}
+
+	public String getTransactionType() {
+		return this.transactionType;
+	}
+
+	public void setTransactionType(String transactionType) {
+		this.transactionType = transactionType;
+	}
+
+	public String getUniqueId1() {
+		return this.uniqueId1;
+	}
+
+	public void setUniqueId1(String uniqueId1) {
+		this.uniqueId1 = uniqueId1;
+	}
+
+	public String getUniqueId2() {
+		return this.uniqueId2;
+	}
+
+	public void setUniqueId2(String uniqueId2) {
+		this.uniqueId2 = uniqueId2;
+	}
+
+	public List<SanctionCustomerVersion> getSanctionCustomerVersions() {
+		return this.sanctionCustomerVersions;
+	}
+
+	public void setSanctionCustomerVersions(List<SanctionCustomerVersion> sanctionCustomerVersions) {
+		this.sanctionCustomerVersions = sanctionCustomerVersions;
+	}
+
+	public SanctionCustomerVersion addSanctionCustomerVersion(SanctionCustomerVersion sanctionCustomerVersion) {
+		getSanctionCustomerVersions().add(sanctionCustomerVersion);
+		sanctionCustomerVersion.setSanctionCustomer(this);
+
+		return sanctionCustomerVersion;
+	}
+
+	public SanctionCustomerVersion removeSanctionCustomerVersion(SanctionCustomerVersion sanctionCustomerVersion) {
+		getSanctionCustomerVersions().remove(sanctionCustomerVersion);
+		sanctionCustomerVersion.setSanctionCustomer(null);
+
+		return sanctionCustomerVersion;
+	}
+
+	public List<MatchingOutcome> getMatchingOutcomes() {
+		return this.matchingOutcomes;
+	}
+
+	public void setMatchingOutcomes(List<MatchingOutcome> matchingOutcomes) {
+		this.matchingOutcomes = matchingOutcomes;
+	}
+	
+}

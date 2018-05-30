@@ -1,0 +1,90 @@
+package com.sas.sanction.entities;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "cust_pty_map_ncore")
+public class CustPtyMapNcore extends BaseEntity 
+{
+	@Id
+	@GenericGenerator(name = "generator", strategy = "increment")
+	@GeneratedValue(generator = "generator")
+	@Column(name = "MAP_ID")
+	private int mapId;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CUST_SNO")
+	private CustDimNcore custDimNcore;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "RELATED_PARTY_SNO")
+	private ExtPartyDimNcore extPartyDimNcore;
+	
+	@Column(name = "RELATIONSHIP_CD")
+	private String relationshipCode;
+	
+	@Column(name = "RELATIONSHIP_CD_DESC")
+	private String relationshipCodeDescription;
+	
+	@Column(name = "RELATED_PARTY_CUSTOMER_FLAG")
+	private String relatedPartyCustomerFlag;
+
+	public int getMapId() {
+		return mapId;
+	}
+
+	public void setMapId(int mapId) {
+		this.mapId = mapId;
+	}
+
+	public CustDimNcore getCustDimNcore() {
+		return custDimNcore;
+	}
+
+	public void setCustDimNcore(CustDimNcore custDimNcore) {
+		this.custDimNcore = custDimNcore;
+	}
+
+	public ExtPartyDimNcore getExtPartyDimNcore() {
+		return extPartyDimNcore;
+	}
+
+	public void setExtPartyDimNcore(ExtPartyDimNcore extPartyDimNcore) {
+		this.extPartyDimNcore = extPartyDimNcore;
+	}
+
+	public String getRelationshipCode() {
+		return relationshipCode;
+	}
+
+	public void setRelationshipCode(String relationshipCode) {
+		this.relationshipCode = relationshipCode;
+	}
+
+	public String getRelationshipCodeDescription() {
+		return relationshipCodeDescription;
+	}
+
+	public void setRelationshipCodeDescription(String relationshipCodeDescription) {
+		this.relationshipCodeDescription = relationshipCodeDescription;
+	}
+
+	public String getRelatedPartyCustomerFlag() {
+		return relatedPartyCustomerFlag;
+	}
+
+	public void setRelatedPartyCustomerFlag(String relatedPartyCustomerFlag) {
+		this.relatedPartyCustomerFlag = relatedPartyCustomerFlag;
+	}
+	
+	
+}

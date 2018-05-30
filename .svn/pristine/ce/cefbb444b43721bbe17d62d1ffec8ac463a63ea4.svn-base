@@ -1,0 +1,63 @@
+package com.sas.sanction.entities;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "cust_acc_map_ncore")
+public class CustAccMapNcore extends BaseEntity
+{
+	@Id
+	@GenericGenerator(name = "generator", strategy = "increment")
+	@GeneratedValue(generator = "generator")
+	@Column(name = "MAP_ID")
+	private int mapId;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ACC_SNO")
+	private AccDimNcore accDimNcore;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "CUST_SNO")
+	private CustDimNcore custDimNcore;
+	
+	@Column(name = "ACC_OWNERSHIP_CAT")
+	private String accOwnershipCat;
+	
+	public int getMapId() {
+		return mapId;
+	}
+	public void setMapId(int mapId) {
+		this.mapId = mapId;
+	}
+	public AccDimNcore getAccDimNcore() {
+		return accDimNcore;
+	}
+	public void setAccDimNcore(AccDimNcore accDimNcore) {
+		this.accDimNcore = accDimNcore;
+	}
+	public CustDimNcore getCustDimNcore() {
+		return custDimNcore;
+	}
+	public void setCustDimNcore(CustDimNcore custDimNcore) {
+		this.custDimNcore = custDimNcore;
+	}
+	public String getAccOwnershipCat() {
+		return accOwnershipCat;
+	}
+	public void setAccOwnershipCat(String accOwnershipCat) {
+		this.accOwnershipCat = accOwnershipCat;
+	}
+}

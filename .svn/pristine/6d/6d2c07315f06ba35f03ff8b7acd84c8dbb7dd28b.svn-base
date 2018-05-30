@@ -1,0 +1,128 @@
+package com.sas.sanction.service.impl;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Service;
+
+import com.sas.sanction.dao.ListDataDao;
+import com.sas.sanction.dao.ListDataDaoImpl;
+import com.sas.sanction.dao.MatchingOutcomeDao;
+import com.sas.sanction.entities.ListData;
+import com.sas.sanction.entities.MatchingAttributeConfig;
+import com.sas.sanction.entities.MatchingOutcome;
+import com.sas.sanction.entities.SanctionCustomer;
+import com.sas.sanction.service.ListDataService;
+
+import me.xdrop.fuzzywuzzy.FuzzySearch;
+@PropertySource("classpath:resource.properties")
+@Service
+public class ListDataServiceImpl implements ListDataService 
+{
+	@Autowired
+	Environment environment;
+	
+	@Autowired
+	ListDataDao listDataDao;
+	
+	@Autowired
+	private ListDataDaoImpl listDataDaoImpl;
+	
+	@Autowired
+	private MatchingOutcomeDao matchingOutcomeDao;
+
+	@Override
+	public ListData getListDataByCustomerId(String customerId) 
+	{
+		return listDataDao.findByCustomerId(customerId);
+	}
+	
+	
+	
+	public List<Map<String, Object>> getListDataForFuzzyLogic(String sql, List<MatchingAttributeConfig> configList, Map<String, String> xmlValues, SanctionCustomer sanctionCustomer, String transactionSno)
+	{
+		List<Map<String, Object>> list = listDataDaoImpl.getListDataForFuzzyLogic(sql);
+		List<Map<String, Object>> finalList = new ArrayList<>();
+		Set<String> keys = list.get(0).keySet();
+		Map<String, Integer> fuzzyKeys = new HashMap<>();
+		Map<String, Integer> nonFuzzyKeys = new HashMap<>();
+		
+		for(String key : keys)
+		{
+			for(MatchingAttributeConfig config : configList)
+			{
+				if(config.getRequestAttributeName().equalsIgnoreCase(key) && config.getMatchType().equalsIgnoreCase("FUZZY"))
+				{
+					fuzzyKeys.put(key, Integer.parseInt(config.getMatchStrength()));
+					break;
+				}
+				else
+				{
+					nonFuzzyKeys.put(key, Integer.parseInt(config.getMatchStrength()));
+					break;
+				}
+			}
+		}
+
+		for(Map<String, Object> map : list)
+		{
+			boolean flag = true;
+			Set<String> keySet = fuzzyKeys.keySet();
+			for(String key : keySet)
+			{
+				int ratio = FuzzySearch.ratio((String) map.get(key), xmlValues.get(environment.getProperty(key)));
+				String matchedValue = xmlValues.get(environment.getProperty(key));
+				String matchingAttributeValue = (String) map.get(key);
+				String matchStrength = String.valueOf(fuzzyKeys.get(key));
+				String listName = (String) map.get("LIST_NAME");
+				MatchingOutcome matchingOutcome = prepareMatchingOutcome(matchedValue, key, matchingAttributeValue, matchStrength, "FUZZY", sanctionCustomer, transactionSno, listName);
+				matchingOutcomeDao.save(matchingOutcome);
+				if(ratio < fuzzyKeys.get(key))
+					flag = false;
+			}
+			
+			if(flag)
+				finalList.add(map);
+			
+			keySet = nonFuzzyKeys.keySet();
+			
+			for(String key : keySet)
+			{
+				String matchedValue = xmlValues.get(environment.getProperty(key));
+				String matchingAttributeValue = (String) map.get(key);
+				String matchStrength = String.valueOf(fuzzyKeys.get(key));
+				String listName = (String) map.get("LIST_NAME");
+				MatchingOutcome matchingOutcome = prepareMatchingOutcome(matchedValue, key, matchingAttributeValue, matchStrength, "DIRECT", sanctionCustomer, transactionSno, listName);
+				matchingOutcomeDao.save(matchingOutcome);
+			}
+			
+			
+		}
+		
+		return finalList;
+	}
+	
+	private MatchingOutcome prepareMatchingOutcome(String matchedValue, String matchingAttribute, String matchingAttributeValue, String matchStrength, String matchType, SanctionCustomer sanctionCustomer, String transactionSno, String listName)
+	{
+		MatchingOutcome matchingOutcome = new MatchingOutcome();
+		matchingOutcome.setCreatedBy("SANCTIONREQUEST");
+		matchingOutcome.setCreatedDt(new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+		matchingOutcome.setCreatedDttm(new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis()));
+		matchingOutcome.setListName(listName);
+		matchingOutcome.setMatchedValue(matchedValue);
+		matchingOutcome.setMatchingAttribute(matchingAttribute);
+		matchingOutcome.setMatchingAttributeValue(matchingAttributeValue);
+		matchingOutcome.setMatchStrength(matchStrength);
+		matchingOutcome.setMatchType(matchType);
+		matchingOutcome.setSanctionCustomer(sanctionCustomer);
+		matchingOutcome.setTransactionSno(transactionSno);
+		return matchingOutcome;
+	}
+}

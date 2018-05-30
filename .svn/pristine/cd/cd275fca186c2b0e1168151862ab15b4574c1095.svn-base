@@ -1,0 +1,110 @@
+package com.sas.sanction.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.sas.sanction.dao.MatchingAttributeLookUpDao;
+import com.sas.sanction.dao.MatchingCriteriaDao;
+import com.sas.sanction.dao.MatchingCriteriaVersionDao;
+import com.sas.sanction.dto.MatchingCriteriaDto;
+import com.sas.sanction.entities.MatchingAttributeConfig;
+import com.sas.sanction.entities.MatchingAttributeConfigVersion;
+import com.sas.sanction.entities.MatchingAttributeLookup;
+import com.sas.sanction.helper.MatchingCriteriaHelper;
+import com.sas.sanction.service.MatchingCriteriaService;
+
+@Service
+public class MatchingCriteriaServiceImpl implements MatchingCriteriaService {
+
+	@Autowired
+	MatchingCriteriaDao criteriaDao;
+	
+	@Autowired
+	MatchingCriteriaHelper criteriaHelper;
+	
+	@Autowired
+	MatchingCriteriaVersionDao criteriaVersionDao;
+	
+	@Autowired 
+	MatchingAttributeLookUpDao attributeLookupDao;
+	
+	private Logger logger = Logger.getLogger(MatchingCriteriaServiceImpl.class);
+	
+	@Value("${com.sas.tableName.lookuptable}")
+	private String lookUpTableName;
+	
+	@Override
+	public List<MatchingCriteriaDto> getAllMatchingCriteria() {
+		
+		List<MatchingAttributeConfig> matchingCriteriaList = criteriaDao.findAll();
+		return criteriaHelper.convertEntityToResponse(matchingCriteriaList);
+	}
+
+	@Override
+	public List<MatchingCriteriaDto> actionsOnMatchingCriteria(List<MatchingCriteriaDto> matchingCriteriaRequestDtoList) {
+
+		if(matchingCriteriaRequestDtoList!=null && !matchingCriteriaRequestDtoList.isEmpty()){
+			for (MatchingCriteriaDto criteria : matchingCriteriaRequestDtoList) {
+				
+				if(criteria.isUpdated()){// update the record
+					MatchingAttributeConfig attribute = criteriaDao.findByMacSno(criteria.getUniqueSno());
+					
+					MatchingAttributeConfigVersion version = criteriaHelper.generateAttributeVersion(attribute,"UPDATE");
+					criteriaVersionDao.save(version);
+					
+					criteriaHelper.generateUpdateMatchingAttribute(criteria,attribute);
+					criteriaDao.save(attribute);
+				}
+				else if(criteria.isDeleted()){// delete the records from master and version
+					MatchingAttributeConfig attribute = criteriaDao.findByMacSno(criteria.getUniqueSno());
+					
+					List<MatchingAttributeConfigVersion> matchingAttributeConfigVersions  = attribute.getMatchingAttributeConfigVersions();
+					if(matchingAttributeConfigVersions!=null && !matchingAttributeConfigVersions.isEmpty()){
+						criteriaVersionDao.delete(matchingAttributeConfigVersions);
+					}
+					criteriaDao.delete(attribute);
+				
+				}
+				else if(criteria.isNew()){ // make a new record
+					
+					MatchingAttributeConfig matchingAttribute = criteriaHelper.generateNewMatchingAttributeConfig(criteria);
+					criteriaDao.save(matchingAttribute);
+					
+					MatchingAttributeConfigVersion version = criteriaHelper.generateAttributeVersion(matchingAttribute,"NEW ENTRY");
+					criteriaVersionDao.save(version);
+				}
+			}
+		}
+		return getAllMatchingCriteria();
+	}
+	
+	
+	@Override
+	public List<String> fetchAttributeLookup() {
+		List<String> columnList = new ArrayList<>();
+		List<MatchingAttributeLookup> findAll = attributeLookupDao.findAll();
+		
+		if(findAll!=null && !findAll.isEmpty()){
+			for (MatchingAttributeLookup matchingAttributeLookup : findAll) {
+				columnList.add(matchingAttributeLookup.getFieldName());
+			}
+		}
+		
+		/*		Object metaData = null;
+		try {
+			metaData = JdbcUtils.extractDatabaseMetaData(dataSource, new ColumnMetaDataCallback(lookUpTableName));
+		} catch (MetaDataAccessException e) {
+			e.printStackTrace();
+			logger.error("Error while fetching column names" + e);
+		}
+		if(metaData!=null ){
+			columnList= (List<String>) metaData;
+		}
+*/		return columnList;
+	}
+	}

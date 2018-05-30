@@ -1,0 +1,48 @@
+package com.sas.sanction.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sas.sanction.dao.MatchingOutcomeDao;
+import com.sas.sanction.dto.MatchingOutcomeResponseDto;
+import com.sas.sanction.service.MatchingOutcomeService;
+
+@RestController
+@RequestMapping("/v1/api/matchOutcome")
+public class MatchingOutcomeAPIController {
+
+	@Autowired
+	MatchingOutcomeService matchingOutcomeService;
+	
+	@Autowired
+	MatchingOutcomeDao outcomeDao;
+	
+	@RequestMapping(path="/viewTransactionMatchingOutcome/{trasactionNo}",method=RequestMethod.GET)
+	public MatchingOutcomeResponseDto getTransactionMatchingOutcome(@PathVariable String trasactionNo) {
+		return matchingOutcomeService.getTransactionMatchingOutcome(trasactionNo);
+	}
+	
+
+	@RequestMapping(path="/viewCustomerMatchingOutcome/{customerId}",method=RequestMethod.GET)
+	public List<MatchingOutcomeResponseDto> getCustomerMatchingOutcome(@PathVariable String customerId) {
+		return matchingOutcomeService.getCustomerMatchingOutcome(customerId);
+	}
+	
+	
+	
+	/*@RequestMapping(path="/saveOutcome",method=RequestMethod.GET)
+	public void saveMatchingOutcome() {
+		
+		MatchingOutcome outcome  =  new MatchingOutcome();
+		
+		outcome.setCustomerId("Customer1");
+		outcomeDao.save(outcome);
+//		return matchingOutcomeService.getMatchingOutcome(uniqueId);
+	}*/
+	
+}

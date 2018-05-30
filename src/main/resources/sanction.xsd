@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	xmlns:tns="http://www.sanction.sas.com/webservices" targetNamespace="http://www.sanction.sas.com/webservices">
+	<xs:element name="sanctionRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element type="xs:string" name="requestType"/>
+        <xs:element name="customerInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="customerId"/>
+              <xs:element type="xs:string" name="segmentName"/>
+              <xs:element type="xs:string" name="nameTitle"/>
+              <xs:element type="xs:string" name="firstName"/>
+              <xs:element type="xs:string" name="secondName"/>
+              <xs:element type="xs:string" name="thirdName"/>
+              <xs:element type="xs:string" name="fourthName"/>
+              <xs:element type="xs:string" name="lastName"/>
+              <xs:element type="xs:string" name="fullName"/>
+              <xs:element type="xs:date" name="dob"/>
+              <xs:element type="xs:string" name="custCategory"/>
+              <xs:element type="xs:string" name="custSubCategory"/>
+              <xs:element type="xs:string" name="taxid"/>
+              <xs:element type="xs:string" name="idtype1"/>
+              <xs:element type="xs:string" name="idnum1"/>
+              <xs:element type="xs:string" name="idtype2"/>
+              <xs:element type="xs:string" name="idnum2"/>
+              <xs:element type="xs:string" name="maritalStatus"/>
+              <xs:element type="xs:string" name="pepflag"/>
+              <xs:element type="xs:string" name="birthPlace"/>
+              <xs:element name="contactInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="residentialInfo">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="address1"/>
+                          <xs:element type="xs:string" name="address2"/>
+                          <xs:element type="xs:string" name="address3"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="state"/>
+                          <xs:element type="xs:string" name="postcode"/>
+                          <xs:element type="xs:string" name="countrycode"/>
+                          <xs:element type="xs:string" name="countryname"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="mailingInfo">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="address1"/>
+                          <xs:element type="xs:string" name="address2"/>
+                          <xs:element type="xs:string" name="address3"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="state"/>
+                          <xs:element type="xs:string" name="postcode"/>
+                          <xs:element type="xs:string" name="countrycode"/>
+                          <xs:element type="xs:string" name="countryname"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="contactNum1"/>
+                    <xs:element type="xs:string" name="contactNum2"/>
+                    <xs:element type="xs:string" name="primaryEmailId"/>
+                    <xs:element type="xs:string" name="secondaryEmailId"/>
+                    <xs:element type="xs:string" name="nationality"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="employeeInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="empTypeCategory"/>
+                    <xs:element type="xs:string" name="empTypeSubCatg"/>
+                    <xs:element type="xs:string" name="orgname1"/>
+                    <xs:element type="xs:string" name="org1registnum"/>
+                    <xs:element type="xs:string" name="orgname2"/>
+                    <xs:element type="xs:string" name="org2registnum"/>
+                    <xs:element type="xs:string" name="designation"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="countryInf">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="countryResiCode"/>
+                    <xs:element type="xs:string" name="countryResidenceName"/>
+                    <xs:element type="xs:string" name="countryCitz1cd"/>
+                    <xs:element type="xs:string" name="countryCitz1name"/>
+                    <xs:element type="xs:string" name="countryCitz2cd"/>
+                    <xs:element type="xs:string" name="countryCitz2name"/>
+                    <xs:element type="xs:string" name="countryOfBirth"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              
+              <xs:element name="parentCompContctInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="address1"/>
+                    <xs:element type="xs:string" name="address2"/>
+                    <xs:element type="xs:string" name="address3"/>
+                    <xs:element type="xs:string" name="city"/>
+                    <xs:element type="xs:string" name="state"/>
+                    <xs:element type="xs:string" name="postcode"/>
+                    <xs:element type="xs:string" name="countrycode"/>
+                    <xs:element type="xs:string" name="countryname"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              
+              <xs:element type="xs:string" name="annualIncome"/>
+              <xs:element type="xs:string" name="netWorthVal"/>
+              <xs:element type="xs:date" name="lastContDate"/>
+              <xs:element type="xs:date" name="lastSusActRptDt"/>
+              <xs:element type="xs:date" name="lastSusTxnRptDt"/>
+              <xs:element type="xs:date" name="lastRiskAssDt"/>
+              <xs:element type="xs:string" name="riskCat"/>
+              <xs:element type="xs:date" name="custSinceDt"/>
+              <xs:element type="xs:string" name="staflag"/>
+              <xs:element type="xs:string" name="exclusionFlag"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="applicationInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="applicationNum"/>
+              <xs:element type="xs:string" name="applicationType"/>
+              <xs:element type="xs:string" name="appStatusCat"/>
+              <xs:element type="xs:string" name="appStatusSubCat"/>
+              <xs:element type="xs:string" name="segmentName"/>
+              <xs:element type="xs:string" name="accountNum"/>
+              <xs:element type="xs:string" name="custNum"/>
+              <xs:element type="xs:string" name="linkAccnum"/>
+              <xs:element type="xs:string" name="nameTitle"/>
+              <xs:element type="xs:string" name="firstName"/>
+              <xs:element type="xs:string" name="secondName"/>
+              <xs:element type="xs:string" name="thirdName"/>
+              <xs:element type="xs:string" name="fourthName"/>
+              <xs:element type="xs:string" name="lastName"/>
+              <xs:element type="xs:string" name="fullName"/>
+              <xs:element type="xs:date" name="dob"/>
+              <xs:element type="xs:string" name="occupation"/>
+              <xs:element type="xs:string" name="occupationType"/>
+              <xs:element type="xs:string" name="birthPlace"/>
+              <xs:element type="xs:string" name="primaryEmail"/>
+              <xs:element type="xs:string" name="secondaryEmail"/>
+              <xs:element type="xs:string" name="exclusionFlag"/>
+              <xs:element name="contactInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="residentialInfo">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="address1"/>
+                          <xs:element type="xs:string" name="address2"/>
+                          <xs:element type="xs:string" name="address3"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="state"/>
+                          <xs:element type="xs:string" name="postcode"/>
+                          <xs:element type="xs:string" name="countrycode"/>
+                          <xs:element type="xs:string" name="countryname"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="mailingInfo">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="address1"/>
+                          <xs:element type="xs:string" name="address2"/>
+                          <xs:element type="xs:string" name="address3"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="state"/>
+                          <xs:element type="xs:string" name="postcode"/>
+                          <xs:element type="xs:string" name="countrycode"/>
+                          <xs:element type="xs:string" name="countryname"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="contactNum1"/>
+                    <xs:element type="xs:string" name="contactNum2"/>
+                    <xs:element type="xs:string" name="emailId"/>
+                    <xs:element type="xs:string" name="nationality"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="employeeInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="empTypeCategory"/>
+                    <xs:element type="xs:string" name="empTypeSubCatg"/>
+                    <xs:element type="xs:string" name="employerName"/>
+                    <xs:element type="xs:string" name="orgname1"/>
+                    <xs:element type="xs:string" name="org1registnum"/>
+                    <xs:element type="xs:string" name="orgname2"/>
+                    <xs:element type="xs:string" name="org2registnum"/>
+                    <xs:element type="xs:string" name="designation"/>
+                    <xs:element type="xs:string" name="annualIncome"/>
+                    <xs:element type="xs:string" name="montlySalary"/>
+                    <xs:element type="xs:string" name="officeContactNumber"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="countryInf">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="countryResiCode"/>
+                    <xs:element type="xs:string" name="countryResidenceName"/>
+                    <xs:element type="xs:string" name="countryCitz1cd"/>
+                    <xs:element type="xs:string" name="countryCitz1name"/>
+                    <xs:element type="xs:string" name="countryCitz2cd"/>
+                    <xs:element type="xs:string" name="countryCitz2name"/>
+                    <xs:element type="xs:string" name="countryOfBirth"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="parentCompContctInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="address1"/>
+                    <xs:element type="xs:string" name="address2"/>
+                    <xs:element type="xs:string" name="address3"/>
+                    <xs:element type="xs:string" name="city"/>
+                    <xs:element type="xs:string" name="state"/>
+                    <xs:element type="xs:string" name="postcode"/>
+                    <xs:element type="xs:string" name="countryCode"/>
+                    <xs:element type="xs:string" name="countryName"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="resedentId"/>
+              <xs:element type="xs:string" name="appIdenType"/>
+              <xs:element type="xs:string" name="appIdenId"/>
+              <xs:element type="xs:string" name="periodService"/>
+              <xs:element type="xs:string" name="channelName"/>
+              <xs:element type="xs:string" name="channelId"/>
+              <xs:element type="xs:string" name="approveByUid"/>
+              <xs:element type="xs:string" name="rejectByUid"/>
+              <xs:element type="xs:date" name="appRejectedDtm"/>
+              <xs:element type="xs:date" name="appRequestedDtm"/>
+              <xs:element type="xs:date" name="appmodDtm"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="transactionInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="creditDebitFlag"/>
+              <xs:element type="xs:string" name="tranxAmt"/>
+              <xs:element type="xs:string" name="tranxType"/>
+              <xs:element type="xs:string" name="tranxFlag"/>
+              <xs:element type="xs:string" name="tranxCat"/>
+              <xs:element type="xs:string" name="custNum"/>
+              <xs:element type="xs:string" name="accountNum"/>
+              <xs:element type="xs:string" name="branchNum"/>
+              <xs:element type="xs:string" name="staffNum"/>
+              <xs:element type="xs:string" name="tranxOrgCntryNum"/>
+              <xs:element type="xs:string" name="tranxDestCntryNum"/>
+              <xs:element type="xs:string" name="relatedInd"/>
+              <xs:element type="xs:string" name="trnxAmountLocalcurr"/>
+              <xs:element type="xs:string" name="tranxAmountTranxcurr"/>
+              <xs:element type="xs:string" name="tranxAmountAcctCurr"/>
+              <xs:element type="xs:date" name="tranxExecutedTime"/>
+              <xs:element type="xs:date" name="tranxExecDate"/>
+              <xs:element type="xs:date" name="tranxPosteDtm"/>
+              <xs:element type="xs:date" name="tranxPostedDt"/>
+              <xs:element type="xs:string" name="secondaryAccNum"/>
+              <xs:element type="xs:string" name="secondaryPartyAccNum"/>
+              <xs:element type="xs:string" name="secondaryPartyNum"/>
+              <xs:element type="xs:string" name="secondaryExtPartyNum"/>
+              <xs:element name="transactionReference">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="tranxRefNum"/>
+                    <xs:element type="xs:string" name="tranxPatternNum"/>
+                    <xs:element type="xs:string" name="channelName"/>
+                    <xs:element type="xs:string" name="channelId"/>
+                    <xs:element type="xs:string" name="serviceName"/>
+                    <xs:element type="xs:string" name="narrative1"/>
+                    <xs:element type="xs:string" name="narrative2"/>
+                    <xs:element type="xs:string" name="narrative3"/>
+                    <xs:element type="xs:string" name="tranxStatus"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="accountInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="accountNum"/>
+              <xs:element type="xs:string" name="accountName"/>
+              <xs:element type="xs:string" name="accountType"/>
+              <xs:element type="xs:string" name="accSubType"/>
+              <xs:element type="xs:string" name="accCurrCode"/>
+              <xs:element type="xs:string" name="accCurrName"/>
+              <xs:element type="xs:date" name="accOpenDt"/>
+              <xs:element type="xs:date" name="accCloseDt"/>
+              <xs:element type="xs:string" name="accStatus"/>
+              <xs:element type="xs:string" name="dormantInd"/>
+              <xs:element type="xs:date" name="lastDormantDate"/>
+              <xs:element type="xs:string" name="prodCatName"/>
+              <xs:element type="xs:string" name="prodSubCatcd1"/>
+              <xs:element type="xs:string" name="prodSubCatcd2"/>
+              <xs:element type="xs:string" name="taxid"/>
+              <xs:element type="xs:string" name="accopenBrnachName"/>
+              <xs:element type="xs:string" name="linkAccnum"/>
+              <xs:element type="xs:string" name="orginalLoanAmtVal"/>
+              <xs:element type="xs:string" name="linkAccRelation"/>
+              <xs:element type="xs:date" name="maturityDt"/>
+              <xs:element type="xs:string" name="segmentName"/>
+              <xs:element type="xs:string" name="exclusionFlag"/>
+              <xs:element name="accountProfile">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="month"/>
+                    <xs:element type="xs:string" name="year"/>
+                    <xs:element type="xs:string" name="totalAccValueAmt"/>
+                    <xs:element type="xs:integer" name="totalAccTranxCount"/>
+                    <xs:element type="xs:string" name="maxAccValueAmt"/>
+                    <xs:element type="xs:string" name="minAccValueAmt"/>
+                    <xs:element type="xs:string" name="avegAccValueAmt"/>
+                    <xs:element type="xs:string" name="totalCreditTranxAmt"/>
+                    <xs:element type="xs:integer" name="totalCreditTranxCount"/>
+                    <xs:element type="xs:string" name="maxCreditTranxAmt"/>
+                    <xs:element type="xs:string" name="minCreditTranxAmt"/>
+                    <xs:element type="xs:string" name="avegCreditTranxAmt"/>
+                    <xs:element type="xs:string" name="totalDebitTranxAmt"/>
+                    <xs:element type="xs:integer" name="totalDebitTranxCount"/>
+                    <xs:element type="xs:string" name="maxDebitTranxAmt"/>
+                    <xs:element type="xs:string" name="minDebitTranxAmt"/>
+                    <xs:element type="xs:string" name="avegDebitTranxAmt"/>
+                    <xs:element type="xs:string" name="cashTranxAmt"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="accountBalance">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="openingBalance"/>
+                    <xs:element type="xs:string" name="currBalance"/>
+                    <xs:element type="xs:string" name="closingBalance"/>
+                    <xs:element type="xs:date" name="balanceDttm"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="externalPartyInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="segmentName"/>
+              <xs:element type="xs:string" name="extPartyNum"/>
+              <xs:element type="xs:string" name="extPartyCat"/>
+              <xs:element type="xs:string" name="extPartySubCat"/>
+              <xs:element type="xs:string" name="idtyp1"/>
+              <xs:element type="xs:string" name="idnum1"/>
+              <xs:element type="xs:string" name="nameTitle"/>
+              <xs:element type="xs:string" name="firstName"/>
+              <xs:element type="xs:string" name="secondName"/>
+              <xs:element type="xs:string" name="thirdName"/>
+              <xs:element type="xs:string" name="fourthName"/>
+              <xs:element type="xs:string" name="lastName"/>
+              <xs:element type="xs:string" name="fullName"/>
+              <xs:element type="xs:string" name="birthPlace"/>
+              <xs:element type="xs:string" name="exclusionFlag"/>
+              <xs:element type="xs:date" name="dob"/>
+              <xs:element name="contactInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="residentialInfo">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="address1"/>
+                          <xs:element type="xs:string" name="address2"/>
+                          <xs:element type="xs:string" name="address3"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="state"/>
+                          <xs:element type="xs:string" name="postcode"/>
+                          <xs:element type="xs:string" name="countrycode"/>
+                          <xs:element type="xs:string" name="countryname"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="contactNum1"/>
+                    <xs:element type="xs:string" name="contactNum2"/>
+                    <xs:element type="xs:string" name="primaryEmailId"/>
+                    <xs:element type="xs:string" name="secondaryEmailId"/>
+                    <xs:element type="xs:string" name="nationality"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="countryInf">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="countryResiCode"/>
+                    <xs:element type="xs:string" name="countryResidenceName"/>
+                    <xs:element type="xs:string" name="countryCitz1cd"/>
+                    <xs:element type="xs:string" name="countryCitz1name"/>
+                    <xs:element type="xs:string" name="countryCitz2cd"/>
+                    <xs:element type="xs:string" name="countryCitz2name"/>
+                    <xs:element type="xs:string" name="countryOfBirth"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="parentCompContctInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="address1"/>
+                    <xs:element type="xs:string" name="address2"/>
+                    <xs:element type="xs:string" name="address3"/>
+                    <xs:element type="xs:string" name="city"/>
+                    <xs:element type="xs:string" name="state"/>
+                    <xs:element type="xs:string" name="postalcode"/>
+                    <xs:element type="xs:string" name="countryCode"/>
+                    <xs:element type="xs:string" name="countryName"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="annualIncome"/>
+              <xs:element type="xs:string" name="orgname"/>
+              <xs:element type="xs:string" name="orgRegNumber"/>
+              <xs:element type="xs:string" name="netWorthVal"/>
+              <xs:element type="xs:string" name="riskCat"/>
+              <xs:element type="xs:string" name="riskSubCat"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="branchInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="branchNum"/>
+              <xs:element type="xs:string" name="branchName"/>
+              <xs:element type="xs:string" name="segmentName"/>
+              <xs:element type="xs:string" name="branchCatg"/>
+              <xs:element type="xs:string" name="branchSubCatg"/>
+              <xs:element type="xs:string" name="branchContactName"/>
+              <xs:element type="xs:string" name="branchContactNum"/>
+              <xs:element type="xs:string" name="exclusionFlag"/>
+              <xs:element name="branchConinfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="address1"/>
+                    <xs:element type="xs:string" name="address2"/>
+                    <xs:element type="xs:string" name="address3"/>
+                    <xs:element type="xs:string" name="city"/>
+                    <xs:element type="xs:string" name="state"/>
+                    <xs:element type="xs:string" name="zipcode"/>
+                    <xs:element type="xs:string" name="countrycode"/>
+                    <xs:element type="xs:string" name="countryname"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="staffInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="staffNum"/>
+              <xs:element type="xs:string" name="segmentName"/>
+              <xs:element type="xs:string" name="staffCatg"/>
+              <xs:element type="xs:string" name="staffSubCatg"/>
+              <xs:element type="xs:string" name="taxid"/>
+              <xs:element type="xs:string" name="idtype1"/>
+              <xs:element type="xs:string" name="idnum1"/>
+              <xs:element type="xs:string" name="idtyp2"/>
+              <xs:element type="xs:string" name="idnum2"/>
+              <xs:element type="xs:date" name="dob"/>
+              <xs:element type="xs:string" name="maritalStatus"/>
+              <xs:element type="xs:string" name="firstName"/>
+              <xs:element type="xs:string" name="secondName"/>
+              <xs:element type="xs:string" name="thirdName"/>
+              <xs:element type="xs:string" name="fourthName"/>
+              <xs:element type="xs:string" name="lastName"/>
+              <xs:element type="xs:string" name="fullName"/>
+              <xs:element type="xs:string" name="pepFlag"/>
+              
+              <xs:element name="contactInfo">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="residentialInfo">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="address1"/>
+                          <xs:element type="xs:string" name="address2"/>
+                          <xs:element type="xs:string" name="address3"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="state"/>
+                          <xs:element type="xs:string" name="postcode"/>
+                          <xs:element type="xs:string" name="countrycode"/>
+                          <xs:element type="xs:string" name="countryname"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="mailingInfo">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="address1"/>
+                          <xs:element type="xs:string" name="address2"/>
+                          <xs:element type="xs:string" name="address3"/>
+                          <xs:element type="xs:string" name="city"/>
+                          <xs:element type="xs:string" name="state"/>
+                          <xs:element type="xs:string" name="postcode"/>
+                          <xs:element type="xs:string" name="countrycode"/>
+                          <xs:element type="xs:string" name="countryname"/>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element type="xs:string" name="contactNum1"/>
+                    <xs:element type="xs:string" name="contactNum2"/>
+                    <xs:element type="xs:string" name="emailId"/>
+                    <xs:element type="xs:string" name="nationality"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="countryInf">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="countryResiCode"/>
+                    <xs:element type="xs:string" name="countryResidenceName"/>
+                    <xs:element type="xs:string" name="countryCitz1cd"/>
+                    <xs:element type="xs:string" name="countryCitz1name"/>
+                    <xs:element type="xs:string" name="countryCitz2cd"/>
+                    <xs:element type="xs:string" name="countryCitz2name"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="annualIncome"/>
+              <xs:element type="xs:string" name="networthVal"/>
+              <xs:element type="xs:date" name="lastContDate"/>
+              <xs:element type="xs:date" name="lastSusActRptDt"/>
+              <xs:element type="xs:date" name="lastSusTxnRptDt"/>
+              <xs:element type="xs:date" name="lastRiskAssDt"/>
+              <xs:element type="xs:string" name="riskCat"/>
+              <xs:element type="xs:string" name="riskSubCat"/>
+              <xs:element type="xs:date" name="staffSinceDt"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="customerAccountMap">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="accountNum"/>
+              <xs:element type="xs:string" name="customerId"/>
+              <xs:element type="xs:string" name="accountOwnershipCat"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="customerPartyMap">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="customerId"/>
+              <xs:element type="xs:string" name="relationshipCode"/>
+              <xs:element type="xs:string" name="relationshipCodeDesc"/>
+              <xs:element type="xs:string" name="relatedPartyCustomerFlag"/>
+              <xs:element type="xs:string" name="relatedPartyNumber"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+	<xs:element name="sanction-response">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="customer-id" type="xs:string"></xs:element>
+				<xs:element name="transaction-number" type="xs:string"></xs:element>
+				<xs:element name="case-id" type="xs:string"></xs:element>
+				<xs:element name="status" type="xs:string"></xs:element>
+				<xs:element name="list-name" type="xs:string"></xs:element>
+				<xs:element name="response-code" type="xs:string"></xs:element>
+				<xs:element name="response-desc" type="xs:string"></xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

@@ -1,0 +1,44 @@
+package com.sas.sanction.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.sas.sanction.dto.MatchingCriteriaDto;
+import com.sas.sanction.service.MatchingCriteriaService;
+
+import io.swagger.annotations.ApiOperation;
+
+@RestController
+@RequestMapping("v1/api/matchCriteria")
+public class MatchingCriteriaAPIController {
+
+	@Autowired
+	MatchingCriteriaService criteriaService;
+	
+	@RequestMapping(path="/listAllMatchingCriteria",method=RequestMethod.GET)
+	@ApiOperation(value="API to List All matching criteria from Matching_Attribute_Config")
+	public List<MatchingCriteriaDto> getAllMatchingCriteria() {
+		
+		return	criteriaService.getAllMatchingCriteria();
+	}
+	
+	@RequestMapping(path="/fetchAttributeLookup",method=RequestMethod.GET)
+	@ApiOperation(value="API to List All field names from Matching_Attribute_LookUp")
+	public List<String> fetchAttributeLookup(){
+		
+		return criteriaService.fetchAttributeLookup();
+	}
+	
+	@RequestMapping(path="/submitMatchingCriteria",method=RequestMethod.POST)
+	@ApiOperation(value="API to update Matching Criteria in Matching_Attribute_Config, along with version creation")
+	public List<MatchingCriteriaDto> updateMatchingCriteria(@RequestBody List<MatchingCriteriaDto> matchingCriteriaRequestDtoList){
+		
+		return criteriaService.actionsOnMatchingCriteria(matchingCriteriaRequestDtoList);
+	}
+	
+}

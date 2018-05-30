@@ -1,0 +1,34 @@
+package com.sas.sanction.entities;
+
+public class NonFinTranFactNcore {
+
+	public void setCustDimNcore(Object accDimNcore) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setBranchDimNcore(BranchDimNcore branchDimNcore) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setExtPartyDimNcore(ExtPartyDimNcore extPartyDimNcore) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setStaffDimNcore(StaffDimNcore staffDimNcore) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setTxnFactNcore(TxnFactNcore txnFactNcore) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+}

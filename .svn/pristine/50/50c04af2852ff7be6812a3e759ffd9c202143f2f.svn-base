@@ -1,0 +1,127 @@
+package com.sas.sanction.specification;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+//import org.apache.commons.lang.StringUtils;
+import org.springframework.data.jpa.domain.Specification;
+
+import com.sas.sanction.dto.CustomerSearchRequestDto;
+import com.sas.sanction.dto.TransactionSearchRequestDto;
+import com.sas.sanction.entities.SanctionCustomer;
+import com.sas.sanction.entities.SanctionCustomer_;
+import com.sas.sanction.utils.SanctionUtils;
+
+public class SanctionCustomerDataSpec implements Specification<SanctionCustomer> {
+
+	
+	 private TransactionSearchRequestDto transactionSearch ;
+	 private CustomerSearchRequestDto customerSearch;
+	 
+	private  boolean isCustomer ;
+	private boolean isTransanction;
+	 
+	public <T> SanctionCustomerDataSpec(T request) {
+		if(request instanceof TransactionSearchRequestDto) {
+			transactionSearch = (TransactionSearchRequestDto) request;
+			isTransanction=true;
+		}else if(request instanceof CustomerSearchRequestDto) {
+			isCustomer= true;
+			customerSearch =(CustomerSearchRequestDto) request;
+		}
+	}
+	
+	@Override
+	public Predicate toPredicate(Root<SanctionCustomer> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		if(isCustomer)	{	
+			 if(SanctionUtils.isStringNotNullorEmpty(customerSearch.getFullname())) {
+			      predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get(SanctionCustomer_.fullName)), "%"+customerSearch.getFullname().toLowerCase()+"%" ));
+			 	}
+			 if (SanctionUtils.isStringNotNullorEmpty(customerSearch.getCustomerNumber())) {
+			      predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionCustomer_.customerId)), customerSearch.getCustomerNumber().toLowerCase() ));
+			    }
+			 if (SanctionUtils.isStringNotNullorEmpty(customerSearch.getNationalId())) {
+			      predicates.add(criteriaBuilder.or(criteriaBuilder.in(criteriaBuilder.lower(root.get(SanctionCustomer_.uniqueId1))).value(customerSearch.getNationalId().toLowerCase()), 
+			    		  criteriaBuilder.in(criteriaBuilder.lower(root.get(SanctionCustomer_.uniqueId2))).value(customerSearch.getNationalId().toLowerCase())));
+			    }
+			 /*if (customerSearch.getScreeningDate()!=null ) {
+			      predicates.add(criteriaBuilder.equal(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(customerSearch.getScreeningDate())));
+			    }*/
+			
+			/* if (customerSearch.getScreeningStartDate()!=null && customerSearch.getScreeningEndDate()==null) {
+			      predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(customerSearch.getScreeningStartDate())));
+			    }
+			 if (customerSearch.getScreeningEndDate()!=null && customerSearch.getScreeningStartDate()==null) {
+				 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(customerSearch.getScreeningEndDate())));
+			    }
+			 if (customerSearch.getScreeningEndDate()!=null && customerSearch.getScreeningStartDate()!=null) {
+				 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(customerSearch.getScreeningEndDate())));
+				 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(customerSearch.getScreeningStartDate())));
+			    }*/
+			
+			 if (customerSearch.getScreeningDateTime()[0]!=null && customerSearch.getScreeningDateTime()[1]==null) {
+				 
+			      predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(customerSearch.getScreeningDateTime()[0])));
+			    }
+			 if (customerSearch.getScreeningDateTime()[1]!=null && customerSearch.getScreeningDateTime()[0]==null) {
+				 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(customerSearch.getScreeningDateTime()[1])));
+			    }
+			 if (customerSearch.getScreeningDateTime()[1]!=null && customerSearch.getScreeningDateTime()[0]!=null) {
+				 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(customerSearch.getScreeningDateTime()[1])));
+				 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(customerSearch.getScreeningDateTime()[0])));
+			    }
+			 if (customerSearch.getDob()!=null) {
+				 predicates.add(criteriaBuilder.equal(root.get(SanctionCustomer_.dateOfBirth), SanctionUtils.removeTime(customerSearch.getDob())));
+			    }
+			 if(SanctionUtils.isStringNotNullorEmpty(customerSearch.getCurrentSanctionStatus())){
+				 predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionCustomer_.status)), customerSearch.getCurrentSanctionStatus().toLowerCase() ));
+			 }
+		}
+		else if(isTransanction) {
+				if(SanctionUtils.isStringNotNullorEmpty(transactionSearch.getTransactionRefNumber())) {
+					predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionCustomer_.transactionNo)), transactionSearch.getTransactionRefNumber().toLowerCase() ));
+				}
+				if(SanctionUtils.isStringNotNullorEmpty(transactionSearch.getTransactionType())) {
+					predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionCustomer_.transactionType)), transactionSearch.getTransactionType().toLowerCase() ));
+				}
+				if(SanctionUtils.isStringNotNullorEmpty(transactionSearch.getCurrentSanctionStatus())) {
+					predicates.add(criteriaBuilder.equal(criteriaBuilder.lower(root.get(SanctionCustomer_.status)), transactionSearch.getCurrentSanctionStatus().toLowerCase() ));
+				}
+				if(transactionSearch.getAmountGreater()!=null){
+					predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionCustomer_.transactionAmount), transactionSearch.getAmountGreater()));
+				}
+				if(transactionSearch.getAmountLess()!=null){
+					predicates.add(criteriaBuilder.lessThan(root.get(SanctionCustomer_.transactionAmount), transactionSearch.getAmountLess()));
+				}
+				/*if (transactionSearch.getTransactionDate()!=null ) {
+				     predicates.add(criteriaBuilder.equal(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(transactionSearch.getTransactionDate())));
+				   }*/
+				
+				 if (transactionSearch.getTransactionStartDate()!=null && transactionSearch.getTransactionEndDate()==null) {
+				      predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(transactionSearch.getTransactionStartDate())));
+				    }
+				 if (transactionSearch.getTransactionEndDate()!=null && transactionSearch.getTransactionStartDate()==null) {
+					 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(transactionSearch.getTransactionEndDate())));
+				    }
+				 if (transactionSearch.getTransactionEndDate()!=null && transactionSearch.getTransactionStartDate()!=null) {
+					 predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(transactionSearch.getTransactionEndDate())));
+					 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(SanctionCustomer_.createdDt), SanctionUtils.removeTime(transactionSearch.getTransactionStartDate())));
+				    }
+			}
+		 return andTogether(predicates, criteriaBuilder);
+	}
+	 
+	
+	private Predicate andTogether(List<Predicate> predicates, CriteriaBuilder cb) {
+	    return cb.and(predicates.toArray(new Predicate[0]));
+	  }
+
+}

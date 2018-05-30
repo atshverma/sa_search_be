@@ -1,0 +1,48 @@
+package com.sas.sanction.service.impl;
+
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sas.sanction.dao.SanctionCustomerDao;
+import com.sas.sanction.dto.TransactionSearchRequestDto;
+import com.sas.sanction.dto.TransactionSearchResponseDto;
+import com.sas.sanction.entities.SanctionCustomer;
+import com.sas.sanction.helper.TransactionSearchHelper;
+import com.sas.sanction.service.TransactionSearchService;
+import com.sas.sanction.specification.SanctionCustomerDataSpec;
+
+@Service
+public class TransactionSearchServiceImpl implements TransactionSearchService {
+
+	@Autowired
+	SanctionCustomerDao sanctionDao; 
+	
+	@Autowired	
+	TransactionSearchHelper transactionHelper;
+	
+	private static Logger logger =  Logger.getLogger(TransactionSearchServiceImpl.class);
+	
+	@Override
+	public List<TransactionSearchResponseDto> getTransactionResults(TransactionSearchRequestDto transactionSearchRequestDto) {
+		
+		List<TransactionSearchResponseDto> responseList = null;
+		
+		boolean shouldSearch = transactionHelper.isTransactionSearchRequestDtoEmpty(transactionSearchRequestDto);
+		if(shouldSearch){
+			SanctionCustomerDataSpec sanctionFullNameSpec = new SanctionCustomerDataSpec(transactionSearchRequestDto);
+			List<SanctionCustomer> sanctionList = sanctionDao.findAll(sanctionFullNameSpec);
+			
+			if(!sanctionList.isEmpty() && sanctionList!=null) {
+				 responseList = transactionHelper.convertSearchResultsToResponse(sanctionList);
+			}
+			
+			System.out.println("Transaction search Completed");
+			logger.info("transaction results sent");
+		}
+		return responseList;
+	}
+
+}

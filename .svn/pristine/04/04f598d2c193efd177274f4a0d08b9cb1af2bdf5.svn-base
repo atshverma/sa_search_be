@@ -1,0 +1,693 @@
+package com.sas.sanction.entities;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+
+/**
+ * The persistent class for the list_data_version database table.
+ * 
+ */
+@Entity
+@Table(name="list_data_version")
+@NamedQuery(name="ListDataVersion.findAll", query="SELECT l FROM ListDataVersion l")
+public class ListDataVersion extends BaseEntity implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Type(type="int")
+	@GenericGenerator(name="ldv_gen",strategy="increment")
+	@GeneratedValue(generator="ldv_gen")
+	@Column(name="list_data_ver_sno")
+	private int listDataVerSno;
+
+	@Column(name="birth_place")
+	private String birthPlace;
+
+	@Column(name="cntry_of_citizenship_1_cd")
+	private String cntryOfCitizenship1Cd;
+
+	@Column(name="cntry_of_citizenship_1_name")
+	private String cntryOfCitizenship1Name;
+
+	@Column(name="cntry_of_citizenship_2_cd")
+	private String cntryOfCitizenship2Cd;
+
+	@Column(name="cntry_of_citizenship_2_name")
+	private String cntryOfCitizenship2Name;
+
+	@Column(name="cntry_of_residency_cd")
+	private String cntryOfResidencyCd;
+
+	@Column(name="cntry_of_residency_name")
+	private String cntryOfResidencyName;
+
+	@Column(name="contact_num_1")
+	private String contactNum1;
+
+	@Column(name="contact_num_2")
+	private String contactNum2;
+
+
+	@Column(name="customer_id")
+	private String customerId;
+
+	@Column(name="deceased_flag")
+	private String deceasedFlag;
+
+	@Column(name="dob")
+	private java.sql.Date dob;
+
+	@Column(name="employment_typ_cat")
+	private String employmentTypCat;
+
+	@Column(name="employment_typ_sub_cat")
+	private String employmentTypSubCat;
+
+	@Column(name="entity_cat")
+	private String entityCat;
+
+	@Column(name="entity_list_num")
+	private String entityListNum;
+
+	@Column(name="entity_sub_cat")
+	private String entitySubCat;
+
+	@Column(name="exclude_screening_flag")
+	private String excludeScreeningFlag;
+
+	@Column(name="first_name")
+	private String firstName;
+
+	@Column(name="fourth_name")
+	private String fourthName;
+
+	@Column(name="full_name")
+	private String fullName;
+
+	@Column(name="id_num_1")
+	private String idNum1;
+
+	@Column(name="id_num_2")
+	private String idNum2;
+
+	@Column(name="id_typ_1")
+	private String idTyp1;
+
+	@Column(name="id_typ_2")
+	private String idTyp2;
+
+	@Column(name="last_name")
+	private String lastName;
+
+	@Column(name="list_cat")
+	private String listCat;
+
+	@Column(name="list_name")
+	private String listName;
+
+	@Column(name="list_source")
+	private String listSource;
+
+	@Column(name="list_sub_cat")
+	private String listSubCat;
+
+	@Column(name="mailing_addr_city")
+	private String mailingAddrCity;
+
+	@Column(name="mailing_addr_cntry_cd")
+	private String mailingAddrCntryCd;
+
+	@Column(name="mailing_addr_cntry_name")
+	private String mailingAddrCntryName;
+
+	@Column(name="mailing_addr_line_1")
+	private String mailingAddrLine1;
+
+	@Column(name="mailing_addr_line_2")
+	private String mailingAddrLine2;
+
+	@Column(name="mailing_addr_line_3")
+	private String mailingAddrLine3;
+
+	@Column(name="mailing_addr_postal_cd")
+	private String mailingAddrPostalCd;
+
+	@Column(name="mailing_addr_state")
+	private String mailingAddrState;
+
+	@Column(name="parent_org_cntry_cd")
+	private String parentOrgCntryCd;
+
+	@Column(name="parent_org_cntry_name")
+	private String parentOrgCntryName;
+
+	@Column(name="residential_addr_city")
+	private String residentialAddrCity;
+
+	@Column(name="residential_addr_cntry_cd")
+	private String residentialAddrCntryCd;
+
+	@Column(name="residential_addr_cntry_name")
+	private String residentialAddrCntryName;
+
+	@Column(name="residential_addr_line_1")
+	private String residentialAddrLine1;
+
+	@Column(name="residential_addr_line_2")
+	private String residentialAddrLine2;
+
+	@Column(name="residential_addr_line_3")
+	private String residentialAddrLine3;
+
+	@Column(name="residential_addr_postal_cd")
+	private String residentialAddrPostalCd;
+
+	@Column(name="residential_addr_state")
+	private String residentialAddrState;
+
+	@Column(name="screening_cat")
+	private String screeningCat;
+
+	@Column(name="screening_sub_cat")
+	private String screeningSubCat;
+
+	@Column(name="second_name")
+	private String secondName;
+
+	@Column(name="third_name")
+	private String thirdName;
+
+	private String title;
+
+	//bi-directional many-to-one association to ListData
+	@ManyToOne
+	@JoinColumn(name="list_data_sno")
+	private ListData listData;
+
+	//bi-directional many-to-one association to ListMaster
+	@ManyToOne
+	@JoinColumn(name="list_master_sno")
+	private ListMaster listMaster;
+
+	@Column(name = "status")
+	private String status;
+	
+	@Column(name = "case_id")
+	private String caseId;
+	
+	@Column(name = "transaction_no")
+	private String transactionNo;
+	
+	public ListDataVersion() {
+	}
+
+	public int getListDataVerSno() {
+		return this.listDataVerSno;
+	}
+
+	public void setListDataVerSno(int listDataVerSno) {
+		this.listDataVerSno = listDataVerSno;
+	}
+
+	public String getBirthPlace() {
+		return this.birthPlace;
+	}
+
+	public void setBirthPlace(String birthPlace) {
+		this.birthPlace = birthPlace;
+	}
+
+	public String getCntryOfCitizenship1Cd() {
+		return this.cntryOfCitizenship1Cd;
+	}
+
+	public void setCntryOfCitizenship1Cd(String cntryOfCitizenship1Cd) {
+		this.cntryOfCitizenship1Cd = cntryOfCitizenship1Cd;
+	}
+
+	public String getCntryOfCitizenship1Name() {
+		return this.cntryOfCitizenship1Name;
+	}
+
+	public void setCntryOfCitizenship1Name(String cntryOfCitizenship1Name) {
+		this.cntryOfCitizenship1Name = cntryOfCitizenship1Name;
+	}
+
+	public String getCntryOfCitizenship2Cd() {
+		return this.cntryOfCitizenship2Cd;
+	}
+
+	public void setCntryOfCitizenship2Cd(String cntryOfCitizenship2Cd) {
+		this.cntryOfCitizenship2Cd = cntryOfCitizenship2Cd;
+	}
+
+	public String getCntryOfCitizenship2Name() {
+		return this.cntryOfCitizenship2Name;
+	}
+
+	public void setCntryOfCitizenship2Name(String cntryOfCitizenship2Name) {
+		this.cntryOfCitizenship2Name = cntryOfCitizenship2Name;
+	}
+
+	public String getCntryOfResidencyCd() {
+		return this.cntryOfResidencyCd;
+	}
+
+	public void setCntryOfResidencyCd(String cntryOfResidencyCd) {
+		this.cntryOfResidencyCd = cntryOfResidencyCd;
+	}
+
+	public String getCntryOfResidencyName() {
+		return this.cntryOfResidencyName;
+	}
+
+	public void setCntryOfResidencyName(String cntryOfResidencyName) {
+		this.cntryOfResidencyName = cntryOfResidencyName;
+	}
+
+	public String getContactNum1() {
+		return this.contactNum1;
+	}
+
+	public void setContactNum1(String contactNum1) {
+		this.contactNum1 = contactNum1;
+	}
+
+	public String getContactNum2() {
+		return this.contactNum2;
+	}
+
+	public void setContactNum2(String contactNum2) {
+		this.contactNum2 = contactNum2;
+	}
+
+	public String getCustomerId() {
+		return this.customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getDeceasedFlag() {
+		return this.deceasedFlag;
+	}
+
+	public void setDeceasedFlag(String deceasedFlag) {
+		this.deceasedFlag = deceasedFlag;
+	}
+
+
+	public java.sql.Date getDob() {
+		return dob;
+	}
+
+	public void setDob(java.sql.Date dob) {
+		this.dob = dob;
+	}
+
+	public String getEmploymentTypCat() {
+		return this.employmentTypCat;
+	}
+
+	public void setEmploymentTypCat(String employmentTypCat) {
+		this.employmentTypCat = employmentTypCat;
+	}
+
+	public String getEmploymentTypSubCat() {
+		return this.employmentTypSubCat;
+	}
+
+	public void setEmploymentTypSubCat(String employmentTypSubCat) {
+		this.employmentTypSubCat = employmentTypSubCat;
+	}
+
+	public String getEntityCat() {
+		return this.entityCat;
+	}
+
+	public void setEntityCat(String entityCat) {
+		this.entityCat = entityCat;
+	}
+
+	public String getEntityListNum() {
+		return this.entityListNum;
+	}
+
+	public void setEntityListNum(String entityListNum) {
+		this.entityListNum = entityListNum;
+	}
+
+	public String getEntitySubCat() {
+		return this.entitySubCat;
+	}
+
+	public void setEntitySubCat(String entitySubCat) {
+		this.entitySubCat = entitySubCat;
+	}
+
+	public String getExcludeScreeningFlag() {
+		return this.excludeScreeningFlag;
+	}
+
+	public void setExcludeScreeningFlag(String excludeScreeningFlag) {
+		this.excludeScreeningFlag = excludeScreeningFlag;
+	}
+
+	public String getFirstName() {
+		return this.firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getFourthName() {
+		return this.fourthName;
+	}
+
+	public void setFourthName(String fourthName) {
+		this.fourthName = fourthName;
+	}
+
+	public String getFullName() {
+		return this.fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getIdNum1() {
+		return this.idNum1;
+	}
+
+	public void setIdNum1(String idNum1) {
+		this.idNum1 = idNum1;
+	}
+
+	public String getIdNum2() {
+		return this.idNum2;
+	}
+
+	public void setIdNum2(String idNum2) {
+		this.idNum2 = idNum2;
+	}
+
+	public String getIdTyp1() {
+		return this.idTyp1;
+	}
+
+	public void setIdTyp1(String idTyp1) {
+		this.idTyp1 = idTyp1;
+	}
+
+	public String getIdTyp2() {
+		return this.idTyp2;
+	}
+
+	public void setIdTyp2(String idTyp2) {
+		this.idTyp2 = idTyp2;
+	}
+
+	public String getLastName() {
+		return this.lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getListCat() {
+		return this.listCat;
+	}
+
+	public void setListCat(String listCat) {
+		this.listCat = listCat;
+	}
+
+	public String getListName() {
+		return this.listName;
+	}
+
+	public void setListName(String listName) {
+		this.listName = listName;
+	}
+
+	public String getListSource() {
+		return this.listSource;
+	}
+
+	public void setListSource(String listSource) {
+		this.listSource = listSource;
+	}
+
+	public String getListSubCat() {
+		return this.listSubCat;
+	}
+
+	public void setListSubCat(String listSubCat) {
+		this.listSubCat = listSubCat;
+	}
+
+	public String getMailingAddrCity() {
+		return this.mailingAddrCity;
+	}
+
+	public void setMailingAddrCity(String mailingAddrCity) {
+		this.mailingAddrCity = mailingAddrCity;
+	}
+
+	public String getMailingAddrCntryCd() {
+		return this.mailingAddrCntryCd;
+	}
+
+	public void setMailingAddrCntryCd(String mailingAddrCntryCd) {
+		this.mailingAddrCntryCd = mailingAddrCntryCd;
+	}
+
+	public String getMailingAddrCntryName() {
+		return this.mailingAddrCntryName;
+	}
+
+	public void setMailingAddrCntryName(String mailingAddrCntryName) {
+		this.mailingAddrCntryName = mailingAddrCntryName;
+	}
+
+	public String getMailingAddrLine1() {
+		return this.mailingAddrLine1;
+	}
+
+	public void setMailingAddrLine1(String mailingAddrLine1) {
+		this.mailingAddrLine1 = mailingAddrLine1;
+	}
+
+	public String getMailingAddrLine2() {
+		return this.mailingAddrLine2;
+	}
+
+	public void setMailingAddrLine2(String mailingAddrLine2) {
+		this.mailingAddrLine2 = mailingAddrLine2;
+	}
+
+	public String getMailingAddrLine3() {
+		return this.mailingAddrLine3;
+	}
+
+	public void setMailingAddrLine3(String mailingAddrLine3) {
+		this.mailingAddrLine3 = mailingAddrLine3;
+	}
+
+	public String getMailingAddrPostalCd() {
+		return this.mailingAddrPostalCd;
+	}
+
+	public void setMailingAddrPostalCd(String mailingAddrPostalCd) {
+		this.mailingAddrPostalCd = mailingAddrPostalCd;
+	}
+
+	public String getMailingAddrState() {
+		return this.mailingAddrState;
+	}
+
+	public void setMailingAddrState(String mailingAddrState) {
+		this.mailingAddrState = mailingAddrState;
+	}
+
+	public String getParentOrgCntryCd() {
+		return this.parentOrgCntryCd;
+	}
+
+	public void setParentOrgCntryCd(String parentOrgCntryCd) {
+		this.parentOrgCntryCd = parentOrgCntryCd;
+	}
+
+	public String getParentOrgCntryName() {
+		return this.parentOrgCntryName;
+	}
+
+	public void setParentOrgCntryName(String parentOrgCntryName) {
+		this.parentOrgCntryName = parentOrgCntryName;
+	}
+
+	public String getResidentialAddrCity() {
+		return this.residentialAddrCity;
+	}
+
+	public void setResidentialAddrCity(String residentialAddrCity) {
+		this.residentialAddrCity = residentialAddrCity;
+	}
+
+	public String getResidentialAddrCntryCd() {
+		return this.residentialAddrCntryCd;
+	}
+
+	public void setResidentialAddrCntryCd(String residentialAddrCntryCd) {
+		this.residentialAddrCntryCd = residentialAddrCntryCd;
+	}
+
+	public String getResidentialAddrCntryName() {
+		return this.residentialAddrCntryName;
+	}
+
+	public void setResidentialAddrCntryName(String residentialAddrCntryName) {
+		this.residentialAddrCntryName = residentialAddrCntryName;
+	}
+
+	public String getResidentialAddrLine1() {
+		return this.residentialAddrLine1;
+	}
+
+	public void setResidentialAddrLine1(String residentialAddrLine1) {
+		this.residentialAddrLine1 = residentialAddrLine1;
+	}
+
+	public String getResidentialAddrLine2() {
+		return this.residentialAddrLine2;
+	}
+
+	public void setResidentialAddrLine2(String residentialAddrLine2) {
+		this.residentialAddrLine2 = residentialAddrLine2;
+	}
+
+	public String getResidentialAddrLine3() {
+		return this.residentialAddrLine3;
+	}
+
+	public void setResidentialAddrLine3(String residentialAddrLine3) {
+		this.residentialAddrLine3 = residentialAddrLine3;
+	}
+
+	public String getResidentialAddrPostalCd() {
+		return this.residentialAddrPostalCd;
+	}
+
+	public void setResidentialAddrPostalCd(String residentialAddrPostalCd) {
+		this.residentialAddrPostalCd = residentialAddrPostalCd;
+	}
+
+	public String getResidentialAddrState() {
+		return this.residentialAddrState;
+	}
+
+	public void setResidentialAddrState(String residentialAddrState) {
+		this.residentialAddrState = residentialAddrState;
+	}
+
+	public String getScreeningCat() {
+		return this.screeningCat;
+	}
+
+	public void setScreeningCat(String screeningCat) {
+		this.screeningCat = screeningCat;
+	}
+
+	public String getScreeningSubCat() {
+		return this.screeningSubCat;
+	}
+
+	public void setScreeningSubCat(String screeningSubCat) {
+		this.screeningSubCat = screeningSubCat;
+	}
+
+	public String getSecondName() {
+		return this.secondName;
+	}
+
+	public void setSecondName(String secondName) {
+		this.secondName = secondName;
+	}
+
+	public String getThirdName() {
+		return this.thirdName;
+	}
+
+	public void setThirdName(String thirdName) {
+		this.thirdName = thirdName;
+	}
+
+	public String getTitle() {
+		return this.title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
+	public ListData getListData() {
+		return this.listData;
+	}
+
+	public void setListData(ListData listData) {
+		this.listData = listData;
+	}
+
+	public ListMaster getListMaster() {
+		return listMaster;
+	}
+
+	public void setListMaster(ListMaster listMaster) {
+		this.listMaster = listMaster;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getCaseId() {
+		return caseId;
+	}
+
+	public void setCaseId(String caseId) {
+		this.caseId = caseId;
+	}
+
+	public String getTransactionNo() {
+		return transactionNo;
+	}
+
+	public void setTransactionNo(String transactionNo) {
+		this.transactionNo = transactionNo;
+	}
+
+	
+	
+}

@@ -1,0 +1,164 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sas.sanction</groupId>
+  <artifactId>sanctions</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+
+  <name>sanctions</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.4.3.RELEASE</version>
+	</parent>
+
+  <dependencies>
+     <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		 <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+		<dependency>
+		    <groupId>com.microsoft.sqlserver</groupId>
+		    <artifactId>mssql-jdbc</artifactId>
+		    <version>6.1.0.jre7</version>
+		</dependency>
+  		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.6.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>2.6.1</version>
+		</dependency>
+        <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>org.modelmapper</groupId>
+		  <artifactId>modelmapper</artifactId>
+		  <version>1.1.0</version>
+		</dependency>
+       	<dependency>
+		    <groupId>me.xdrop</groupId>
+		    <artifactId>fuzzywuzzy</artifactId>
+		    <version>1.1.10</version>
+		</dependency>
+       	<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-tomcat</artifactId>
+		   	<scope>provided</scope>
+		</dependency>
+  </dependencies>
+   
+ <build>
+  <plugins>
+ 	<!-- Added for Automatically generation of Java Classes from XSD file -->   
+    <plugin>
+		<groupId>org.codehaus.mojo</groupId>
+		<artifactId>jaxb2-maven-plugin</artifactId>
+		<version>1.6</version>
+		<executions>
+			<execution>
+				<id>xjc</id>
+				<goals>
+					<goal>xjc</goal>
+				</goals>
+			</execution>
+		</executions>
+		<configuration>
+			<schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
+			<outputDirectory>${project.basedir}/target/generated-sources</outputDirectory>
+			<clearOutputDir>false</clearOutputDir>
+		</configuration>
+	</plugin>
+	
+	<!-- Maven comipler plugin -->
+	<plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-compiler-plugin</artifactId>
+	    <configuration>
+	        <source>1.7</source>
+	        <target>1.7</target>
+	        <compilerArgument>-proc:none</compilerArgument>
+	    </configuration>
+    </plugin>
+	  
+	<!-- Plugin for static Metamodels  -->
+	<plugin>
+	    <groupId>org.bsc.maven</groupId>
+	    <artifactId>maven-processor-plugin</artifactId>
+	    <executions>
+	        <execution>
+	            <id>process</id>
+	            <goals>
+	                <goal>process</goal>
+	            </goals>
+	            <phase>generate-sources</phase>
+	            <configuration>
+	                <outputDirectory>target/metamodel</outputDirectory>
+	            </configuration>
+	        </execution>
+	    </executions>
+	</plugin>
+	<!-- Plugin for static Metamodels  -->
+	<plugin>
+	    <groupId>org.codehaus.mojo</groupId>
+	    <artifactId>build-helper-maven-plugin</artifactId>
+	    <executions>
+	        <execution>
+	            <id>add-source</id>
+	            <phase>generate-sources</phase>
+	            <goals>
+	                <goal>add-source</goal>
+	            </goals>
+	            <configuration>
+	                <sources>
+	                    <source>target/metamodel</source>
+	                </sources>
+	            </configuration>
+	        </execution>
+	    </executions>
+	</plugin>
+  <!-- Plugin for Configuring Launcher Class -->
+  	<plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-jar-plugin</artifactId>
+		<configuration>
+		  <archive>
+		    <manifest>
+			<mainClass>com.sas.sanction.LauncherClass</mainClass>
+		    </manifest>
+		  </archive>
+		</configuration>
+    </plugin>
+  
+  </plugins>
+</build>
+  
+</project>

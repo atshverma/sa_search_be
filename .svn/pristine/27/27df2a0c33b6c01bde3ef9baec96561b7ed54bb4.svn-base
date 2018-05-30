@@ -1,0 +1,71 @@
+package com.sas.sanction.helper;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.sas.sanction.dto.MatchingCriteriaDto;
+import com.sas.sanction.entities.MatchingAttributeConfig;
+import com.sas.sanction.entities.MatchingAttributeConfigVersion;
+
+@Component
+public class MatchingCriteriaHelper {
+
+	public List<MatchingCriteriaDto> convertEntityToResponse(List<MatchingAttributeConfig> matchingCriteriaList) {
+		List<MatchingCriteriaDto> responseList = new ArrayList<>();
+		
+		for (MatchingAttributeConfig attributes : matchingCriteriaList) {
+			MatchingCriteriaDto response =  new MatchingCriteriaDto();
+			
+			response.setUniqueSno(String.valueOf(attributes.getMacSno()));
+			response.setMatchingFieldName(attributes.getRequestAttributeName());
+			response.setMatchType(attributes.getMatchType());
+			
+			responseList.add(response);
+		}
+		
+		return responseList;
+	}
+
+	public MatchingAttributeConfig generateUpdateMatchingAttribute( MatchingCriteriaDto criteria, MatchingAttributeConfig attribute) {
+		Date now = new Date();
+		attribute.setMatchType(criteria.getMatchType());
+		attribute.setRequestAttributeName(criteria.getMatchingFieldName());
+		attribute.setUpdatedDt(now);
+		attribute.setUpdatedDttm(new Timestamp(now.getTime()));
+		attribute.setUpdatedBy("User");
+		
+		return attribute;
+	}
+
+	public MatchingAttributeConfigVersion generateAttributeVersion(MatchingAttributeConfig attribute,String action) {
+		
+		MatchingAttributeConfigVersion version = new MatchingAttributeConfigVersion();
+			version.setRequestAttributeName(attribute.getRequestAttributeName());
+			version.setMatchStrength(attribute.getMatchStrength());
+			version.setMatchType(attribute.getMatchType());
+			version.setMatchingAttributeConfig(attribute);
+			version.setAction(action);
+			version.setCreatedBy("User");
+			version.setUpdatedBy("User");
+			
+		return version;
+	}
+
+	public MatchingAttributeConfig generateNewMatchingAttributeConfig(MatchingCriteriaDto criteria) {
+		MatchingAttributeConfig config = new MatchingAttributeConfig();
+		config.setMatchType(criteria.getMatchType());
+		config.setRequestAttributeName(criteria.getMatchingFieldName());
+		config.setMatchStrength("100");// default 100 %
+		config.setCreatedBy("User");
+		config.setUpdatedBy("User");
+		return config;
+	}
+
+	
+	
+
+}
